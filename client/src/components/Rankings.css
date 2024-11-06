@@ -19,14 +19,14 @@
   align-items: center;
   justify-content: flex-start;
 
-  width: calc(100vw - 50vw - 100px);
+  width: calc(100vw - 40vw - 100px);
 }
 
 .loader-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   width: calc(100vw - 50vw - 100px);
   height: calc(100vh - 100px);
@@ -35,6 +35,8 @@
 .loader-container svg {
   transform: scale(2);
   transform-origin: center;
+
+  margin-top: 30vh;
 }
 
 .heartbeat {

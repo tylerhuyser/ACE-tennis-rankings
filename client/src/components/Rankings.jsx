@@ -20,7 +20,7 @@ export default function Rankings (props) {
         
         <div className="loader-container heartbeat" id="rankings-loader">
 
-          <IconLogo />
+          <IconLogo color="black" />
 
         </div>
       

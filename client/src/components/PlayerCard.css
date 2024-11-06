@@ -25,19 +25,28 @@
 }
 
 .player-name-container {
-  width: 50%;
+  width: 30%;
+  flex-grow: 1;
 }
 
 .player-country-container {
   width: 30%;
 }
 
-.player-ranking, .player-tournaments {
-  width: 10%;
+.player-tournaments, .player-points {
+  width: 20%;
+}
+
+.player-ranking{
+  width: 5%;
 }
 
 .player-country, .emojiFlag, .player-name {
   margin: 5px;
+}
+
+.player-name {
+  width: 100%;
 }
 
 .emojiFlag {

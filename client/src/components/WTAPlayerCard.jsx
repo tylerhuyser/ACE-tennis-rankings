@@ -63,11 +63,11 @@ export default function WTAPlayerCard(props) {
         <p className='player-name'>{(discipline === "Doubles" && race === "Race") ? `${playerData?.player1?.fullName} / ${playerData?.player2?.fullName}` : playerData?.player?.fullName}</p>
       </div>
 
-      <p className='player-points'>{playerData.points}</p>
+      <p className='player-points'>{`${playerData.points} points`}</p>
 
       {playerData.tournamentsPlayed ?
         
-        <p className='player-tournaments'>{playerData.tournamentsPlayed}</p>
+        <p className='player-tournaments'>{`${playerData.tournamentsPlayed} tournaments played`}</p>
 
       :
         <></>

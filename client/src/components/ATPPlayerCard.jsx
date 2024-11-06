@@ -64,11 +64,11 @@ export default function ATPPlayerCard(props) {
         <p className='player-name'>{(discipline === "Doubles" && race === "Race") ? `${playerData?.player1?.name} / ${playerData?.player2?.name}` : playerData?.name}</p>
       </div>
 
-      <p className='player-points'>{playerData.points}</p>
+      <p className='player-points'>{`${playerData.points} points`}</p>
 
       {playerData.tournamentsPlayed ?
         
-        <p className='player-tournaments'>{playerData.tournaments_played}</p>
+        <p className='player-tournaments'>{`${playerData.tournaments_played} tournaments`}</p>
 
       :
         <></>
