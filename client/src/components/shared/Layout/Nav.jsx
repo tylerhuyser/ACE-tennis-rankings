@@ -11,11 +11,13 @@ export default function Nav(props) {
     <>
       <div className='nav-container'>
 
+        {/* ATP */}
         <Link to="/atp/singles" className='nav-link' onClick={setLoading} >ATP Singles</Link>
         <Link to="/atp/doubles" className='nav-link' onClick={setLoading}>ATP Doubles</Link>
         <Link to="/atp/singles-race" className='nav-link' onClick={setLoading}>ATP Singles Race</Link>
         <Link to="/atp/doubles-race" className='nav-link' onClick={setLoading}>ATP Doubles Race</Link>
 
+        {/* WTA */}
         <Link to="/wta/singles" className='nav-link' onClick={setLoading}>WTA Singles</Link>
         <Link to="/wta/doubles" className='nav-link' onClick={setLoading}>WTA Doubles</Link>
         <Link to="/wta/singles-race" className='nav-link' onClick={setLoading}>WTA Singles Race</Link>

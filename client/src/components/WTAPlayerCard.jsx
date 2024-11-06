@@ -6,12 +6,12 @@ import "./PlayerCard.css"
 
 export default function WTAPlayerCard(props) {
 
-  const { playerData, discipline, race } = props
+  const { playerData, discipline, race, index } = props
 
   // console.log(playerData)
   
   return (
-    <div className='player-card'>
+    <div className='player-card' key={`${playerData.ranking}${index}`}>
 
       <p className='player-ranking'>{playerData.ranking}</p>
 

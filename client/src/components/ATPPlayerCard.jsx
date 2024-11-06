@@ -7,12 +7,12 @@ import "./PlayerCard.css"
 
 export default function ATPPlayerCard(props) {
 
-  const { playerData, discipline, race } = props
+  const { playerData, discipline, race, index } = props
 
   // console.log(playerData)
   
   return (
-    <div className='player-card'>
+    <div className='player-card' key={`${playerData.ranking}${index}`}>
 
       <p className='player-ranking'>{playerData.ranking}</p>
 
@@ -68,7 +68,7 @@ export default function ATPPlayerCard(props) {
 
       {playerData.tournamentsPlayed ?
         
-        <p className='player-tournaments'>{`${playerData.tournaments_played} tournaments`}</p>
+        <p className='player-tournaments'>{`${playerData.tournaments_played} tournaments played`}</p>
 
       :
         <></>

@@ -13,6 +13,7 @@ export default function Layout(props) {
     <div className='layout-container'>
 
       <Header />
+      
       <Nav setLoading={setLoading} />
 
       <div className='body-container'>

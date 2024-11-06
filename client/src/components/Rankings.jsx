@@ -10,8 +10,8 @@ export default function Rankings (props) {
 
   const { data, tour, discipline, race, loading } = props
 
-  console.log(data)
-  console.log(tour)
+  // console.log(data)
+  // console.log(tour)
   
   return (
     <>
@@ -43,6 +43,7 @@ export default function Rankings (props) {
                     playerData={player}
                     discipline={discipline}
                     race={race}
+                    index={index}
                 />))}       
               </>
             :
@@ -52,6 +53,7 @@ export default function Rankings (props) {
                     playerData={player}
                     discipline={discipline}
                     race={race}
+                    index={index}
                   />
                 ))}
               </>
