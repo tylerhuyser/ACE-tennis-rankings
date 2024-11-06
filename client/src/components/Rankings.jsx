@@ -1,58 +1,67 @@
-import React, { Suspense } from 'react'
-import { useLocation } from "react-router-dom";
+import React from 'react'
 
 import IconLogo from './shared/Loading/IconLogo';
-import PlayerCard from './PlayerCard';
+import ATPPlayerCard from './ATPPlayerCard';
+import WTAPlayerCard from './WTAPlayerCard';
 
-export default function Rankings(props) {
+import './Rankings.css'
 
-  let location = useLocation()
-  console.log(props)
-  const { data, tour, discipline } = props
+export default function Rankings (props) {
+
+  const { data, tour, discipline, race, loading } = props
 
   console.log(data)
   console.log(tour)
-
   
   return (
     <>
-      <div className='rankings-container'>
+      
+      {loading || data.length === 0 ?
+        
+        <div className="loader-container heartbeat" id="rankings-loader">
 
-        <div className='rankings-hero-container'>
-
-          <h2 className='rankings-title'>{`${tour.toUpperCase()} ${discipline.charAt(0).toUpperCase()}${discipline.split("-")[0].slice(1)} `}{discipline.split("-")[1] ? `${discipline.split("-")[1].charAt(0).toUpperCase()}${discipline.split("-")[1].slice(1)}` : ``}{' Rankings'}</h2>
-
-        </div>
-
-        <div className='players-container'>
-
-          <Suspense fallback={   
-            
-              <div className="loader-icon heartbeat" id="rankings-loader">
-
-                <IconLogo />
-
-            </div>
-
-          }>
-
-            {data.map((player, index) => {
-
-              return (
-
-                <PlayerCard
-                  playerData={player}
-                  tour={tour}
-                  discipline={discipline}
-                />
-              )
-            })}
-
-          </Suspense>
+          <IconLogo />
 
         </div>
+      
+        :
 
-      </div>
+        <div className='rankings-container'>
+
+          <div className='rankings-hero-container'>
+
+            <h2 className='rankings-title'>{`${tour} ${discipline} ${race} Rankings`}</h2>
+
+          </div>
+
+          <div className='players-container'>
+
+            {tour === 'ATP' ?
+              <>
+                {data.map((player, index) => (
+                  <ATPPlayerCard
+                    playerData={player}
+                    discipline={discipline}
+                    race={race}
+                />))}       
+              </>
+            :
+              <>
+                {data.map((player, index) => (
+                  <WTAPlayerCard
+                    playerData={player}
+                    discipline={discipline}
+                    race={race}
+                  />
+                ))}
+              </>
+            }
+
+          </div>
+
+        </div>
+      }
+
     </>
   )
 }

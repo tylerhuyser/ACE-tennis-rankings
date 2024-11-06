@@ -1,0 +1,56 @@
+.player-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid grey;
+
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}
+
+.player-country-container, .country-name-container, .flag-container, .player-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-country-container {
+  flex-direction: column;
+}
+
+.player-name-container {
+  width: 50%;
+}
+
+.player-country-container {
+  width: 30%;
+}
+
+.player-ranking, .player-tournaments {
+  width: 10%;
+}
+
+.player-country, .emojiFlag, .player-name {
+  margin: 5px;
+}
+
+.emojiFlag {
+  text-align: center;
+  vertical-align: middle;
+
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 0px;
+}
+
+.player-ranking {
+  font-weight: bold;
+}
+
+
