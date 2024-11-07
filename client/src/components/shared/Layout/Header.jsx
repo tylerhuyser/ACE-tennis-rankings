@@ -4,10 +4,16 @@ import IconLogo from "../Loading/IconLogo"
 
 import "./Header.css"
 
-export default function Header() {
+export default function Header(props) {
+
+  const { setVisibility } = props
   
   return (
     <div className='header-container'>
+
+      <div className='nav-visibility-icon-container'>
+        
+      </div>
       
       <div className='header-logo-container'>
 

@@ -36,7 +36,16 @@
     background: #efefef;
 }
 
-@media (min-width: 1024px) and (max-width: 1024px){
+@media screen and (max-width: 820px), screen and (max-device-width: 820px) {
+  .body-container {
+    width: calc(65vw - 75px);
+    max-width: calc(65vw - 75px);
+    padding: 25px;
+    margin-right: calc(5vw);
+  }
+}
 
-
+@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+  .body-container {
+  }
 }

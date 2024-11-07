@@ -67,7 +67,7 @@ export default function WTAPlayerCard(props) {
 
       {playerData.tournamentsPlayed ?
         
-        <p className='player-tournaments'>{`${playerData.tournamentsPlayed} tournaments played`}</p>
+        <p className='player-tournaments'>{`${playerData.tournamentsPlayed} tourneys`}</p>
 
       :
         <></>

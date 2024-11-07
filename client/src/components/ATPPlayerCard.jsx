@@ -68,7 +68,7 @@ export default function ATPPlayerCard(props) {
 
       {playerData.tournamentsPlayed ?
         
-        <p className='player-tournaments'>{`${playerData.tournaments_played} tournaments played`}</p>
+        <p className='player-tournaments'>{`${playerData.tournaments_played} tourneys`}</p>
 
       :
         <></>

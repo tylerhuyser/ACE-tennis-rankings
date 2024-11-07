@@ -40,6 +40,11 @@
   margin-top: 30vh;
 }
 
+@media screen and (max-width: 820px), screen and (max-device-width: 820px) {
+
+}
+
+
 .heartbeat {
 	-webkit-animation: heartbeat 10s ease-in-out infinite both;
 	        animation: heartbeat 10s ease-in-out infinite both;
