@@ -8,6 +8,7 @@
   height: calc(100vh - 100px);
 
   position: fixed;
+  top: 100px;
   left: 0px;
   z-index: 3;
 
@@ -24,7 +25,7 @@
 
 .nav-link {
 
-  width: calc(20vw - 50px);;
+  width: calc(20vw - 50px);
   padding: 10px 25px;
   margin-bottom: 5px;
 
@@ -44,4 +45,18 @@
 
 .nav-link:first-of-type {
   border-top: #4f6c44 1px solid;
+}
+
+
+@media screen and (max-width: 820px) {
+
+  .nav-container {
+    width: 30vw;
+    font-size: 30px;
+  }
+
+  .nav-link {
+    width: calc(30vw - 50px);;
+  }
+
 }
