@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
-import Layout from './components/shared/Layout/Layout'
-import Rankings from './components/Rankings'
+import Layout from './components/shared/Layout/Layout';
+import Rankings from './components/Rankings';
 
 import {
   getATPSinglesData,
@@ -13,32 +13,30 @@ import {
   getWTASinglesRaceData,
   getWTADoublesData,
   getWTADoublesRaceData
-} from "./services/index"
+} from "./services/index";
 
-import './App.css'
+import './App.css';
 
 function App() {
+  let location = useLocation();
+  let pathName = location.pathname;
 
-  let location = useLocation()
-  let pathName = location.pathname
-  let tour = pathName.split('/')[1].toUpperCase()
-  let discipline = `${pathName.split('/')[2].split("-")[0].charAt(0).toUpperCase()}${pathName.split('/')[2].split("-")[0].slice(1)}`
-  let race = pathName.split('/')[2].split("-")[1]
+  const { tour, discipline, race } = useMemo(() => {
+    const pathSegments = pathName.split('/');
+    const tour = pathSegments[1]?.toUpperCase();
+    const discipline = `${pathSegments[2]?.split('-')[0][0].toUpperCase()}${pathSegments[2]?.split('-')[0].slice(1)}`;
+    const race = pathSegments[2]?.includes('race') ? 'Race' : '';
+    return { tour, discipline, race };
+  }, [pathName]);
 
-  console.log(`Current PathName: ${pathName}`)
-  console.log(`Tour: ${tour}`)
-  console.log(`Discipline: ${discipline}`)
+  console.log(`Path: ${pathName}`);
+  console.log(`Tour: ${tour}`);
+  console.log(`Discipline: ${discipline}`);
+  console.log(`Race: ${race}`);
 
-  if (race) {
-    console.log('Race Rankings')
-    race = 'Race'
-  } else if (!race) {
-    console.log('Regular Rankings (Non-Race)')
-    race = ''
-  }
-
-  const [loading, setLoading] = useState(false)
-  const [rankingsData, setRankingsData] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [rankingsData, setRankingsData] = useState([]);
+  const prevParams = useRef({ tour, discipline, race }); // Track previous params
 
   const fetchFunctions = {
     'atp-singles': getATPSinglesData,
@@ -51,72 +49,70 @@ function App() {
     'wta-doubles-race': getWTADoublesRaceData,
   };
 
+  // Effect to fetch data
   useEffect(() => {
-    setLoading(true)
-  }, [location])
+    const hasParamsChanged =
+      tour !== prevParams.current.tour ||
+      discipline !== prevParams.current.discipline ||
+      race !== prevParams.current.race;
 
-  useEffect(() => {
-    if (loading) {
-      setRankingsData([])
-    }
-  }, [loading])
+    // Fetch data only if parameters change or if it's the first render
+    if (hasParamsChanged || rankingsData.length === 0) {
 
-  useEffect(() => {
- 
-    if (rankingsData.length === 0) {
+      async function fetchData() {
 
-      async function fetchData(tour, discipline) {
-      
-        const key = `${tour.toLowerCase()}-${pathName.split('/')[2]}`
-        const fetchFunction = fetchFunctions[key] || getATPSinglesData
-  
-        console.log(`FETCH - ${tour} ${discipline} data`)
-        const data = await fetchFunction()
-  
-        setRankingsData(data.sort((a, b) => a.ranking - b.ranking))
-    }
-   
-    fetchData(tour, discipline) 
+        setLoading(true);
 
-    }
- 
+        const key = `${tour?.toLowerCase()}-${discipline.toLowerCase()}${race ? `-race` : ''}`;
+        const fetchFunction = fetchFunctions[key] || getATPSinglesData;
 
-  }, [rankingsData])
+        console.log(`Fetching data for ${tour} ${discipline} ${race}`);
 
-  useEffect(() => {
-    if (rankingsData.length > 0) {
+        try {
+          const data = await fetchFunction();
+          setRankingsData(data.sort((a, b) => a.ranking - b.ranking));
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+        setLoading(false);
+        prevParams.current = { tour, discipline, race };
+      }
+
+      fetchData();
+
+    } else if (!hasParamsChanged) {
       setLoading(false)
     }
-  }, [rankingsData])
+  }, [tour, discipline, race, loading]); // Dependency on tour, discipline, and race
+
+  const routesConfig = [
+    { path: "/atp/singles" },
+    { path: "/atp/singles-race" },
+    { path: "/atp/doubles" },
+    { path: "/atp/doubles-race" },
+    { path: "/wta/singles" },
+    { path: "/wta/singles-race" },
+    { path: "/wta/doubles" },
+    { path: "/wta/doubles-race" },
+  ];
 
   return (
-
-    <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race} >
-        
+    <>
+      <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
         <Routes>
-
-          <Route exact path="/atp/singles" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/atp/singles-race" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/atp/doubles" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/atp/doubles-race" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/wta/singles" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/wta/singles-race" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/wta/doubles" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
-          <Route exact path="/wta/doubles-race" element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />} />
-
+          {routesConfig.map(({ path }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />}
+              />
+            )
+          )}
           <Route path="*" element={<Navigate to="/atp/singles" replace />} />
-
         </Routes>
-
-    </Layout>
-  )
+      </Layout>
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -9,9 +9,6 @@ import './Rankings.css'
 export default function Rankings (props) {
 
   const { data, tour, discipline, race, loading } = props
-
-  // console.log(data)
-  // console.log(tour)
   
   return (
     <>

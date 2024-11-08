@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
 import Head from "./Head"
 import Header from './Header'
@@ -14,34 +14,29 @@ export default function Layout(props) {
 
   const [navVisibility, setNavVisibility] = useState(false)
   const [iconVisibility, setIconVisibility] = useState(false)
-  
-  console.log(window.innerWidth)
 
-  useEffect(() => {
-    if (window.innerWidth > 768) {
-      console.log('Window Widened - resetting NavVisibility State')
-      setNavVisibility(false)
-    }
-  }, [window.innerWidth])
-
-
+  console.log("Layout Props:", { tour, discipline, race });
   
   return (
 
-    <Head tour={tour} discipline={discipline} race={race}>
+    <>
+
+      <Head tour={tour} discipline={discipline} race={race}></Head>
+
       <div className='layout-container'>
 
         <Header navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
-        
+          
         <Nav setLoading={setLoading} navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
 
         <div className='body-container'>
 
           {props.children}
-          
+            
         </div>
 
       </div>
-    </Head>
+      
+    </>
   )
 }
