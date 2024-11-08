@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
+import Head from "./Head"
 import Header from './Header'
 import Nav from './Nav'
 
@@ -8,6 +9,8 @@ import './Layout.css'
 export default function Layout(props) {
 
   const { setLoading } = props
+
+  const {tour, discipline, race } = props
 
   const [navVisibility, setNavVisibility] = useState(false)
   const [iconVisibility, setIconVisibility] = useState(false)
@@ -24,18 +27,21 @@ export default function Layout(props) {
 
   
   return (
-    <div className='layout-container'>
 
-      <Header navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
-      
-      <Nav setLoading={setLoading} navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
+    <Head tour={tour} discipline={discipline} race={race}>
+      <div className='layout-container'>
 
-      <div className='body-container'>
-
-        {props.children}
+        <Header navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
         
-      </div>
+        <Nav setLoading={setLoading} navVisibility={navVisibility} setNavVisibility={setNavVisibility} iconVisibility={iconVisibility} setIconVisibility={setIconVisibility} />
 
-    </div>
+        <div className='body-container'>
+
+          {props.children}
+          
+        </div>
+
+      </div>
+    </Head>
   )
 }

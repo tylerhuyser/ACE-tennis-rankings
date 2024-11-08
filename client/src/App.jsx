@@ -90,7 +90,8 @@ function App() {
   }, [rankingsData])
 
   return (
-    <Layout setLoading={setLoading} >
+
+    <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race} >
         
         <Routes>
 
