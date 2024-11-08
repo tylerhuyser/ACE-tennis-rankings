@@ -36,7 +36,7 @@
     background: #efefef;
 }
 
-@media screen and (max-width: 820px), screen and (max-device-width: 820px) {
+@media screen and (max-width: 912px), screen and (max-device-width: 912px) {
   .body-container {
     width: calc(65vw - 75px);
     max-width: calc(65vw - 75px);

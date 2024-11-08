@@ -1,7 +1,4 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons/faBars'
-import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark'
 
 import IconLogo from "../Loading/IconLogo"
 
@@ -22,10 +19,12 @@ export default function Header(props) {
     <div className='header-container'>
 
       <div className='nav-visibility-icon-container'>
-
-        <FontAwesomeIcon icon={faBars} className={iconVisibility ? 'nav-visibility-icon hidden' : 'nav-visibility-icon visible'} onClick={() => toggleVisibility(navVisibility, iconVisibility)} />
         
-        <FontAwesomeIcon icon={faXmark} className={ iconVisibility ? 'nav-visibility-icon visible' : 'nav-visibility-icon hidden'} onClick={() => toggleVisibility(navVisibility, iconVisibility)} />
+        <div className={iconVisibility ? 'menu-icon open' :  'menu-icon closed'} onClick={() => toggleVisibility(navVisibility, iconVisibility)} >
+          <span className='menu-icon-line' id="line-1"></span>
+          <span className='menu-icon-line' id="line-2"></span>
+          <span className='menu-icon-line' id="line-3"></span>
+        </div>
 
       </div>
       

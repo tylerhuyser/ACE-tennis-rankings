@@ -11,7 +11,7 @@ export default function Nav(props) {
   
   return (
     <>
-      <div className={ navVisibility ? 'nav-container' : 'nav-container hidden'}>
+      <div className={ navVisibility ? 'nav-container slide-bottom' : 'nav-container hidden'}>
 
         {/* ATP */}
         <Link to="/atp/singles" className='nav-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }} >ATP Singles</Link>
