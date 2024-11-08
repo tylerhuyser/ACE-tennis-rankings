@@ -66,8 +66,9 @@
   }
 
   .header-logo-container {
-    width: 100%;
-    margin-right: 0px
+    width: 70vw;
+    margin-left: 5vw;
+    margin-right: 15vw;
   }
 
   .header-logo-container svg {
@@ -82,6 +83,43 @@
     align-items: center;
     justify-content: flex-start;
     width: 10vw;
+  }
+
+  
+}
+
+@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+
+  .header-container {
+    font-size: 23px;
+  }
+
+  .header-logo-container {
+    width: 90vw;
+    margin-left: 0vw;
+    margin-right: 10vw;
+  }
+
+  .header-logo-container svg {
+    transform: scale(0.6);
+    margin-right: 0px;
+  }
+
+  .nav-visibility-icon {
+    font-size: 30px;
+  }
+
+  
+}
+
+@media screen and (min-width: 344px), screen and (max-device-width: 344px) {
+
+  .header-logo-title {
+    display: none;
+  }
+
+  .header-logo-container svg {
+    transform: scale(0.75);
   }
 
   

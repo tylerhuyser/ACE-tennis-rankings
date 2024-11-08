@@ -81,3 +81,9 @@
   }
 
 }
+
+@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+  .nav-link {
+    font-size: 23px;
+  }
+}

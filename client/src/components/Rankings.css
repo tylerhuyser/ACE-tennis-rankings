@@ -5,7 +5,8 @@
   justify-content: flex-start;
 
   width: calc(100vw - 40vw - 100px);
-  width: 100%;
+  width: calc(100% - 25px);
+  /* width: 100%; */
 }
 
 .rankings-title {
@@ -40,8 +41,22 @@
   margin-top: 30vh;
 }
 
-@media screen and (max-width: 820px), screen and (max-device-width: 820px) {
+@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
 
+  .rankings-title {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+
+  .rankings-container {
+    width: 100%;
+  }
+
+  .rankings-title {
+    font-size: 23px;
+  }
 }
 
 

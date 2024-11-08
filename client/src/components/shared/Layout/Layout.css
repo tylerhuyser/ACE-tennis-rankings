@@ -46,6 +46,22 @@
 }
 
 @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+
+  .layout-container {
+    justify-content: center;
+  }
+
+
   .body-container {
+    width: calc(100vw - 100px);
+    max-width: calc(100vw - 100px);
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+  .body-container {
+    width: calc(100vw - 50px);
+    max-width: calc(100vw - 50px);
   }
 }

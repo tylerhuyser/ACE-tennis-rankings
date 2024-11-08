@@ -5,6 +5,7 @@
   justify-content: space-between;
   
   width: 100%;
+  width: calc(100% - 25px);
   padding: 10px;
   border-bottom: 1px solid grey;
 
@@ -62,4 +63,18 @@
   font-weight: bold;
 }
 
+@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+  .player-card {
+    font-size: 16px;
+  }
+}
 
+@media screen and (min-width: 344px), screen and (max-device-width: 344px) {
+
+  .player-card {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  
+}
