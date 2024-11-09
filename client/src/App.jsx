@@ -36,6 +36,7 @@ function App() {
 
   const [loading, setLoading] = useState(false);
   const [rankingsData, setRankingsData] = useState([]);
+  const [error, setError] = useState(false)
   const prevParams = useRef({ tour, discipline, race }); // Track previous params
 
   const fetchFunctions = {
@@ -57,7 +58,7 @@ function App() {
       race !== prevParams.current.race;
 
     // Fetch data only if parameters change or if it's the first render
-    if (hasParamsChanged || rankingsData.length === 0) {
+    if ((hasParamsChanged || rankingsData.length === 0) && !error) {
 
       async function fetchData() {
 
@@ -73,6 +74,7 @@ function App() {
           setRankingsData(data.sort((a, b) => a.ranking - b.ranking));
         } catch (error) {
           console.error('Error fetching data:', error);
+          setError(error)
         }
         setLoading(false);
         prevParams.current = { tour, discipline, race };
