@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router';
 import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg'
 
 export default function Head (props) {
@@ -10,6 +11,13 @@ export default function Head (props) {
 
   if (!tour || !discipline) return null;
 
+  const location = useLocation()
+  const path = location.pathname
+  console.log(`Path: ${path}`)
+  const pageURL = `${window.location.origin}${path}`
+  console.log(`PageURL: ${pageURL}`)
+  console.log(path === "/")
+
   return (
     <div>
       <Helmet>
@@ -18,6 +26,7 @@ export default function Head (props) {
         <meta property="og:title" content="ACE TENNIS RANKINGS" />
         <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
         <meta property="og:image" content={OGImage} />
+        <link rel="canonical" href={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
       </Helmet>
     </div>
   );
