@@ -29,10 +29,10 @@ function App() {
     return { tour, discipline, race };
   }, [pathName]);
 
-  console.log(`Path: ${pathName}`);
-  console.log(`Tour: ${tour}`);
-  console.log(`Discipline: ${discipline}`);
-  console.log(`Race: ${race}`);
+  console.log(`App.js - Path: ${pathName}`);
+  console.log(`App.js - Tour: ${tour}`);
+  console.log(`App.js - Discipline: ${discipline}`);
+  console.log(`App.js - Race: ${race}`);
 
   const [loading, setLoading] = useState(false);
   const [rankingsData, setRankingsData] = useState([]);

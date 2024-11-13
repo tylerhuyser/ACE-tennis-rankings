@@ -6,16 +6,16 @@ import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg'
 export default function Head (props) {
 
   const { tour = '', discipline = '', race = '' } = props;
-  console.log(`Props Test ${OGImage}`)
-  console.log(`Props Test ${tour}`)
+  // console.log(`Props Test ${OGImage}`)
+  // console.log(`Props Test ${tour}`)
 
   if (!tour || !discipline) return null;
 
   const location = useLocation()
   const path = location.pathname
-  console.log(`Path: ${path}`)
+  console.log(`Head.jsx - Path: ${path}`)
   const pageURL = `${window.location.origin}${path}`
-  console.log(`PageURL: ${pageURL}`)
+  console.log(`Head.jsx - PageURL: ${pageURL}`)
   console.log(path === "/")
 
   return (

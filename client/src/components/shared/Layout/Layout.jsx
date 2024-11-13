@@ -15,7 +15,7 @@ export default function Layout(props) {
   const [navVisibility, setNavVisibility] = useState(false)
   const [iconVisibility, setIconVisibility] = useState(false)
 
-  console.log("Layout Props:", { tour, discipline, race });
+  // console.log("Layout Props:", { tour, discipline, race });
   
   return (
 
