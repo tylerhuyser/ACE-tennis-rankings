@@ -2,13 +2,16 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:client": "vite build",
+    "build:server": "vite build",
+    "build": "vite build && cp server.mjs dist/",
+    "serve": "NODE_ENV=production node dist/server.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "postbuild": "node sitemap-builder.js"
+    "postbuild": "node sitemap-builder.cjs"
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
@@ -16,14 +19,16 @@
     "country-code-converter": "^1.0.0",
     "gulp": "^5.0.0",
     "install": "^0.13.0",
+    "node-fetch": "^3.3.2",
     "npm": "^10.9.0",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
-    "react-router": "^6.27.0",
-    "react-router-dom": "^6.27.0",
-    "react-router-sitemap": "^1.2.0"
+    "react-router-dom": "^6.28.0",
+    "react-router-sitemap": "^1.2.0",
+    "vike": "^0.4.203"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

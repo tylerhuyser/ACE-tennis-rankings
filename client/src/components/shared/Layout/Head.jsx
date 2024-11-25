@@ -1,33 +1,58 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router';
-import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg'
+import React, { useEffect, useState, Suspense } from 'react';
 
-export default function Head (props) {
+// Lazy-load Helmet only for Client-side Rendering (CSR)
+const HelmetLazy = React.lazy(() => import('react-helmet-async').then(module => ({ default: module.Helmet })));
 
-  const { tour = '', discipline = '', race = '' } = props;
-  // console.log(`Props Test ${OGImage}`)
-  // console.log(`Props Test ${tour}`)
+import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg';
 
+export default function Head(props) {
+  const { tour = '', discipline = '', race = '', currentUrl = '' } = props;
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  console.log(`Is Client? ${isClient}`);
+
+  // Avoid rendering if necessary props are missing
   if (!tour || !discipline) return null;
 
-  const location = useLocation()
-  const path = location.pathname
-  console.log(`Head.jsx - Path: ${path}`)
-  const pageURL = `${window.location.origin}${path}`
-  console.log(`Head.jsx - PageURL: ${pageURL}`)
-  console.log(path === "/")
+  let path = ''; 
+  let pageURL = ''; 
 
+  if (typeof window !== "undefined") {
+    // Client-side: use window.location
+    path = window.location.pathname;
+    pageURL = `${window.location.origin}${path}`;
+  } else {
+    // Server-side: use `currentUrl` passed as a prop or get it from req.originalUrl in the server
+    path = currentUrl;
+    pageURL = `https://rankings.gamesetblog.com${path}`;
+  }
+
+  const helmetContent = (
+    <>
+      <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
+      <meta name="description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
+      <meta property="og:title" content="ACE TENNIS RANKINGS" />
+      <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
+      <meta property="og:image" content={OGImage} />
+      <link rel="canonical" href={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
+    </>
+  );
+
+  if (!isClient) {
+    return <>{helmetContent}</>;
+  }
+
+  // For Client-Side Rendering (CSR)
   return (
     <div>
-      <Helmet>
-        <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
-        <meta name="description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
-        <meta property="og:title" content="ACE TENNIS RANKINGS" />
-        <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
-        <meta property="og:image" content={OGImage} />
-        <link rel="canonical" href={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
-      </Helmet>
+      <Suspense fallback={null}>
+        <HelmetLazy>{helmetContent}</HelmetLazy>
+      </Suspense>
     </div>
   );
 }

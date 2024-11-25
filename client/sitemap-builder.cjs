@@ -1,5 +1,5 @@
 const Sitemap = require('react-router-sitemap').default;
-const routes = require('./src/routes'); // This is where your routes are defined (we'll set this up below)
+const routes = require('./src/routes.cjs'); // This is where your routes are defined (we'll set this up below)
 
 // Initialize the sitemap generator
 new Sitemap(routes)

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
@@ -17,15 +18,27 @@ import {
 
 import './App.css';
 
-function App() {
-  let location = useLocation();
-  let pathName = location.pathname;
+function App({ data }) {
+  
+  console.log(data)
+
+  const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [rankingsData, setRankingsData] = useState(data || []);
+  const [error, setError] = useState(false)
+
+  let location;
+  if (typeof window !== 'undefined') {
+    location = useLocation();
+  }
+
+  let pathName = location?.pathname || '/'; // Default to '/' if no location is available
 
   const { tour, discipline, race } = useMemo(() => {
     const pathSegments = pathName.split('/');
-    const tour = pathSegments[1]?.toUpperCase();
-    const discipline = `${pathSegments[2]?.split('-')[0][0].toUpperCase()}${pathSegments[2]?.split('-')[0].slice(1)}`;
-    const race = pathSegments[2]?.includes('race') ? 'Race' : '';
+    const tour = pathName === "/" ? "ATP" : pathSegments[1]?.toUpperCase();
+    const discipline = pathName === "/" ? "Singles" : `${pathSegments[2]?.split('-')[0][0].toUpperCase()}${pathSegments[2]?.split('-')[0].slice(1)}`;
+    const race = pathName === "/" ? "" :  pathSegments[2]?.includes('race') ? 'Race' : '';
     return { tour, discipline, race };
   }, [pathName]);
 
@@ -33,11 +46,12 @@ function App() {
   console.log(`App.js - Tour: ${tour}`);
   console.log(`App.js - Discipline: ${discipline}`);
   console.log(`App.js - Race: ${race}`);
-
-  const [loading, setLoading] = useState(false);
-  const [rankingsData, setRankingsData] = useState([]);
-  const [error, setError] = useState(false)
+ 
   const prevParams = useRef({ tour, discipline, race }); // Track previous params
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const fetchFunctions = {
     'atp-singles': getATPSinglesData,
@@ -64,8 +78,8 @@ function App() {
 
         setLoading(true);
 
-        const key = `${tour?.toLowerCase()}-${discipline.toLowerCase()}${race ? `-race` : ''}`;
-        const fetchFunction = fetchFunctions[key] || getATPSinglesData;
+        const key = (pathName === "/") ? "atp-singles" : `${tour?.toLowerCase()}-${discipline.toLowerCase()}${race ? `-race` : ''}`;
+        const fetchFunction = fetchFunctions[key]
 
         console.log(`Fetching data for ${tour} ${discipline} ${race}`);
 
@@ -88,6 +102,7 @@ function App() {
   }, [tour, discipline, race, loading]); // Dependency on tour, discipline, and race
 
   const routesConfig = [
+    {path: "/"},
     { path: "/atp/singles" },
     { path: "/atp/singles-race" },
     { path: "/atp/doubles" },
@@ -100,19 +115,20 @@ function App() {
 
   return (
     <>
-      <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
         <Routes>
-          {routesConfig.map(({ path }) => (
+        {routesConfig.map(({ path }) => (
               <Route
                 key={path}
                 path={path}
-                element={<Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />}
-              />
+                element={
+                  <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
+                    <Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />
+                  </Layout>
+              }/>
             )
-          )}
-          <Route path="*" element={<Navigate to="/atp/singles" replace />} />
+        )}
+          {isClient ? <Route path="*" element={<Navigate to="/" replace />} /> : null}
         </Routes>
-      </Layout>
     </>
   );
 }

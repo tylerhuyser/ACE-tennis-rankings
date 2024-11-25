@@ -1,5 +1,6 @@
 // src/routes.js
 const routes = [
+  { path: "/" },
   { path: "/atp/singles" },
   { path: "/atp/singles-race" },
   { path: "/atp/doubles" },

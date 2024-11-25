@@ -41,6 +41,7 @@ export default function Rankings (props) {
                     discipline={discipline}
                     race={race}
                     index={index}
+                    key={`${player.ranking}${index}`}
                 />))}       
               </>
             :
@@ -51,6 +52,7 @@ export default function Rankings (props) {
                     discipline={discipline}
                     race={race}
                     index={index}
+                    key={`${player.ranking}${index}`}
                   />
                 ))}
               </>

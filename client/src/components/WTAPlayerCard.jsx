@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactCountryFlag from "react-country-flag"
+import { ReactCountryFlag } from "react-country-flag";
 import { convertISO3CountryCode } from 'country-code-converter'
 
 import "./PlayerCard.css"
@@ -8,8 +8,6 @@ export default function WTAPlayerCard(props) {
 
   const { playerData, discipline, race, index } = props
 
-  // console.log(playerData)
-  
   return (
     <div className='player-card' key={`${playerData.ranking}${index}`}>
 
