@@ -7,7 +7,7 @@
     "dev": "vite",
     "build:client": "vite build",
     "build:server": "vite build",
-    "build": "vite build && cp server.mjs dist/",
+    "build": "npm install --legacy-peer-deps && vite build && cp server.mjs dist/",
     "serve": "NODE_ENV=production node dist/server.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
