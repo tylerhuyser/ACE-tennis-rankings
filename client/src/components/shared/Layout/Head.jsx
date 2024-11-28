@@ -42,7 +42,7 @@ export default function Head(props) {
       <meta property="og:title" content="ACE TENNIS RANKINGS" />
       <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
       <meta property="og:image" content={OGImage} />
-      <meta property="og:url" content={seo.url} />
+      <meta property="og:url" content={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
       <meta property="og:type" content="website" />
 
       <meta name="twitter:card" content="summary_large_image" />
