@@ -34,12 +34,23 @@ export default function Head(props) {
 
   const helmetContent = (
     <>
+      <link rel="canonical" href={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
+      <html lang="en" />
+
       <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
-      <meta name="description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
+      <meta name="description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
       <meta property="og:title" content="ACE TENNIS RANKINGS" />
       <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
       <meta property="og:image" content={OGImage} />
-      <link rel="canonical" href={path === "/" ? 'https://rankings.gamesetblog.com/atp/singles' : pageURL} />
+      <meta property="og:url" content={seo.url} />
+      <meta property="og:type" content="website" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@gameset_blog" />
+      <meta name="twitter:title" content={`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`} />
+      <meta name="twitter:description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
+      <meta name="twitter:image" content={OGImage} />
+
     </>
   );
 
