@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 
 import IconLogo from "../Loading/IconLogo"
 
@@ -30,9 +31,13 @@ export default function Header(props) {
       
       <div className='header-logo-container'>
 
-        <IconLogo color="white" />
+        <Link to="/" className='header-link'>
         
-        <p className='header-logo-title'>ACE TENNIS RANKINGS</p>
+          <IconLogo color="white" />
+        
+          <p className='header-logo-title'>ACE TENNIS RANKINGS</p>
+          
+        </Link>
 
       </div>
 

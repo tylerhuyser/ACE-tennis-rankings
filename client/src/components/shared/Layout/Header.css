@@ -32,6 +32,18 @@
   margin-right: calc(20vw - 100px + 25px)
 }
 
+.header-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+  text-decoration-line: none;
+
+  color: white;
+}
+
 .header-logo-container svg {
   transform: scale(1);
   transform-origin: left;

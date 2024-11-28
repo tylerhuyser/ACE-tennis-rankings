@@ -13,7 +13,8 @@ export default function Nav(props) {
     <>
       <div className={ navVisibility ? 'nav-container slide-bottom' : 'nav-container hidden'}>
 
-      <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" taget="_blank">Tennis News</a>
+        {/* External */}
+        <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" taget="_blank">Tennis News</a>
 
         {/* ATP */}
         <Link to="/atp/singles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }} >ATP Singles</Link>
@@ -26,10 +27,6 @@ export default function Nav(props) {
         <Link to="/wta/doubles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Doubles</Link>
         <Link to="/wta/singles-race" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Singles Race</Link>
         <Link to="/wta/doubles-race" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Doubles Race</Link>
-
-        {/* External */}
-{/* 
-        <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" taget="_blank">Tennis News</a> */}
 
       </div>
     </>
