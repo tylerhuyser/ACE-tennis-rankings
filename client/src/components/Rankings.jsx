@@ -27,7 +27,7 @@ export default function Rankings (props) {
 
           <div className='rankings-hero-container'>
 
-            <h2 className='rankings-title'>{`${tour} ${discipline} ${race} Rankings`}</h2>
+            <h1 className='rankings-title'>{`${tour} ${discipline} ${race} Rankings`}</h1>
 
           </div>
 
