@@ -32,6 +32,9 @@ export default function Head(props) {
     pageURL = `https://rankings.gamesetblog.com${path}`;
   }
 
+  console.log(tour)
+  console.log(discipline)
+
   const helmetContent = (
     <>
       <link rel="canonical" href={pageURL} />
