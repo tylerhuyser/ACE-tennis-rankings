@@ -14,7 +14,7 @@ export default function Nav(props) {
       <div className={ navVisibility ? 'nav-container slide-bottom' : 'nav-container hidden'}>
 
         {/* External */}
-        <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" taget="_blank">Tennis News</a>
+        <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" target="_blank">Tennis News</a>
 
         {/* ATP */}
         <Link to="/atp/singles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }} >ATP Singles</Link>
