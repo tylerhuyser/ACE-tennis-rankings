@@ -8,29 +8,34 @@ import pkg from 'react-helmet-async';
 const { HelmetProvider } = pkg;
 
 
-async function onRenderHtml(pageContext) {
+async function onRenderHtml({ pageContext }) {
   
   const { Page, pageProps, urlPathname } = pageContext
 
+  const helmetContext = {}
+
   const pageHtml = dangerouslySkipEscape(
     renderToString(
-      <HelmetProvider>
+      <HelmetProvider context={helmetContext}>
         <StaticRouter location={urlPathname}>
-          <Page {...pageProps} />
+          {/* <Page {...pageProps} data={pageContext.data} /> */}
+          <Page pageContext={pageContext} />
         </StaticRouter>
       </HelmetProvider>
     ),
   )
 
+  const { helmet } = helmetContext
+
   return escapeInject`
-    <!doctype html>
-    <html lang="en">
-      <head>
-    @@ -8,6 +15,7 @@
-      </head>
-      <body>
-        <div id="root">${pageHtml}</div>
-      </body>
-    </html>
-  `
-}
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      ${dangerouslySkipEscape(helmet.title.toString())}
+      ${dangerouslySkipEscape(helmet.meta.toString())}
+    </head>
+    <body>
+      <div id="root">${pageHtml}</div>
+    </body>
+  </html>
+`}

@@ -8,7 +8,7 @@ import './Layout.css'
 
 export default function Layout(props) {
 
-  const { setLoading } = props
+  const { pageContext, setLoading } = props
 
   const {tour, discipline, race } = props
 
@@ -21,7 +21,7 @@ export default function Layout(props) {
 
     <>
 
-      <Head tour={tour} discipline={discipline} race={race}></Head>
+      <Head pageContext={pageContext} tour={tour} discipline={discipline} race={race}></Head>
 
       <div className='layout-container'>
 

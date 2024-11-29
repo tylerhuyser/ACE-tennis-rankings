@@ -1,10 +1,6 @@
 import express from 'express';
 import { renderPage } from 'vike/server'; // Ensure vike is installed
 
-// Fix for Helmet import
-import pkg from 'react-helmet-async';
-const { Helmet } = pkg; // Use default import and destructure
-
 const app = express();
 
 // Serve static files in production (adjust paths as needed)

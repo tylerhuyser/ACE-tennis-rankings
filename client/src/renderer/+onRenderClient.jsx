@@ -11,14 +11,18 @@ async function onRenderClient(pageContext) {
 
   const { Page } = pageContext
 
+  const helmetContext = {}
+
   const container = document.getElementById('root')
   const page = (
-    <HelmetProvider>
+    <HelmetProvider context={helmetContext}>
       <BrowserRouter>
           <Page />
       </BrowserRouter>
     </HelmetProvider>
   )
+
+  const { helmet } = helmetContext
 
   if (pageContext.isHydration) {
     root = hydrateRoot(container, page)

@@ -18,13 +18,14 @@ import {
 
 import './App.css';
 
-function App({ data }) {
-  
-  console.log(data)
+function App({ pageContext }) {
+
+  // console.log(`Page Context Begin`)
+  // console.log(pageContext)
 
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [rankingsData, setRankingsData] = useState(data || []);
+  const [rankingsData, setRankingsData] = useState(pageContext?.data || []);
   const [error, setError] = useState(false)
 
   let location;
@@ -121,7 +122,7 @@ function App({ data }) {
                 key={path}
                 path={path}
                 element={
-                  <Layout setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
+                  <Layout pageContext={pageContext} setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
                     <Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />
                   </Layout>
               }/>

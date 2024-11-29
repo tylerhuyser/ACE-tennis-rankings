@@ -5,8 +5,8 @@ import { useData } from '../../renderer/useData'
 
 const { data } = useData
 
-function Page(pageContext) {
+function Page({ pageContext }) {
   return (
-    <App pageContext={data}></App>
+    <App pageContext={pageContext} />
   );
 }
