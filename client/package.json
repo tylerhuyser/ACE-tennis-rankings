@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run server:dev",
+    "dev": "npm run serve:dev",
     "build": "npm install --legacy-peer-deps && vite build && cp server.mjs dist/ && cp ./public/_redirects ./dist/_redirects",
-    "serve:dev": "node ./server.mjs",
+    "serve:dev": "node ./src/server/server.js",
     "serve:prod": "NODE_ENV=production node dist/server.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/core": "^7.26.0",
     "axios": "^1.7.7",
+    "compression": "^1.7.5",
     "country-code-converter": "^1.0.0",
     "express": "^4.21.1",
     "gulp": "^5.0.0",
