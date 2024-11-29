@@ -33,8 +33,15 @@ async function startServer() {
       headersOriginal: req.headers
     }
     const pageContext = await renderPage(pageContextInit)
+
     if (pageContext.errorWhileRendering) {
       // Install error tracking here, see https://vike.dev/error-tracking
+      // Vike Automatically calls 'console.log(error), when an error occurs, so this code is not needed.
+    }
+
+    if (!result.html) {
+      console.warn('No HTML generated for the requested URL:', url);
+      return res.redirect(302, '/'); // Redirect to root for invalid cases
     }
 
     const { httpResponse } = pageContext
