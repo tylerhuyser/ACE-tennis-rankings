@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Layout from './components/shared/Layout/Layout';
@@ -20,12 +20,8 @@ import './App.css';
 
 function App({ pageContext }) {
 
-  // console.log(`Page Context Begin`)
-  // console.log(pageContext)
-
-  const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [rankingsData, setRankingsData] = useState(pageContext?.data || []);
+  const [rankingsData, setRankingsData] = useState(pageContext.data || []);
   const [error, setError] = useState(false)
 
   let location;
@@ -35,24 +31,19 @@ function App({ pageContext }) {
 
   let pathName = location ? location.pathname : pageContext.urlOriginal || '/'
 
-  const { tour, discipline, race } = useMemo(() => {
-    const pathSegments = pathName.split('/');
-    const tour = pathName === "/" ? "ATP" : pathSegments[1]?.toUpperCase();
-    const discipline = pathName === "/" ? "Singles" : `${pathSegments[2]?.split('-')[0][0].toUpperCase()}${pathSegments[2]?.split('-')[0].slice(1)}`;
-    const race = pathName === "/" ? "" :  pathSegments[2]?.includes('race') ? 'Race' : '';
-    return { tour, discipline, race };
-  }, [pathName]);
+  const pathSegments = pathName.split('/')
+  let tour = pathName === "/" ? "ATP" : pathSegments[1]?.toUpperCase()
+  let type = pathName === "/" ? "Singles" : `${pathSegments[2]?.split('-')[0][0].toUpperCase()}${pathSegments[2]?.split('-')[0].slice(1)}`
+
+  if (pathSegments[2] && pathSegments[2].split('-').length === 2) {
+    type = type + ` Race`
+  }
 
   console.log(`App.js - Path: ${pathName}`);
   console.log(`App.js - Tour: ${tour}`);
-  console.log(`App.js - Discipline: ${discipline}`);
-  console.log(`App.js - Race: ${race}`);
+  console.log(`App.js - Type: ${type}`);
  
-  const prevParams = useRef({ tour, discipline, race }); // Track previous params
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const prevParams = useRef({ tour, type }); // Track previous params
 
   const fetchFunctions = {
     'atp-singles': getATPSinglesData,
@@ -69,8 +60,7 @@ function App({ pageContext }) {
   useEffect(() => {
     const hasParamsChanged =
       tour !== prevParams.current.tour ||
-      discipline !== prevParams.current.discipline ||
-      race !== prevParams.current.race;
+      type !== prevParams.current.type
 
     // Fetch data only if parameters change or if it's the first render
     if ((hasParamsChanged || rankingsData.length === 0) && !error) {
@@ -79,10 +69,10 @@ function App({ pageContext }) {
 
         setLoading(true);
 
-        const key = (pathName === "/") ? "atp-singles" : `${tour?.toLowerCase()}-${discipline.toLowerCase()}${race ? `-race` : ''}`;
+        const key = (pathName === "/") ? "atp-singles" : `${tour?.toLowerCase()}-${type.split(" ")[0].toLowerCase()}${type.includes("Race")? `-race` : ''}`;
         const fetchFunction = fetchFunctions[key]
 
-        console.log(`Fetching data for ${tour} ${discipline} ${race}`);
+        console.log(`Fetching data for ${tour} ${type}`);
 
         try {
           const data = await fetchFunction();
@@ -92,7 +82,7 @@ function App({ pageContext }) {
           setError(error)
         }
         setLoading(false);
-        prevParams.current = { tour, discipline, race };
+        prevParams.current = { tour, type };
       }
 
       fetchData();
@@ -100,7 +90,7 @@ function App({ pageContext }) {
     } else if (!hasParamsChanged) {
       setLoading(false)
     }
-  }, [tour, discipline, race, loading]); // Dependency on tour, discipline, and race
+  }, [tour, type, loading]); // Dependency on tour, discipline, and race
 
   const routesConfig = [
     {path: "/"},
@@ -122,13 +112,13 @@ function App({ pageContext }) {
                 key={path}
                 path={path}
                 element={
-                  <Layout pageContext={pageContext} setLoading={setLoading} tour={tour} discipline={discipline} race={race}>
-                    <Rankings data={rankingsData} tour={tour} discipline={discipline} race={race} loading={loading} />
+                  <Layout pageContext={pageContext} setLoading={setLoading} tour={tour} type={type}>
+                    <Rankings data={rankingsData} tour={tour}  type={type} loading={loading} />
                   </Layout>
               }/>
             )
         )}
-          {isClient ? <Route path="*" element={<Navigate to="/" replace />} /> : null}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     </>
   );

@@ -9,7 +9,7 @@ const HelmetLazy = React.lazy(() => import('react-helmet-async').then(module => 
 import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg';
 
 export default function Head(props) {
-  const { pageContext, tour = '', discipline = '', race = '', currentUrl = '' } = props;
+  const { pageContext, tour = '', type = '', currentUrl = '' } = props;
 
   const [isClient, setIsClient] = useState(false);
 
@@ -20,7 +20,7 @@ export default function Head(props) {
   console.log(`Is Client? ${isClient}`);
 
   // Avoid rendering if necessary props are missing
-  if (!tour || !discipline) return null;
+  if (!tour || !type) return null;
 
   let path = ''; 
   let pageURL = ''; 
@@ -36,8 +36,8 @@ export default function Head(props) {
     pageURL = `https://rankings.gamesetblog.com${path}`;
   }
 
-  console.log(`Head.js: ${tour}`)
-  console.log(`Head.js: ${discipline}`)
+  console.log(`Head.js Tour: ${tour}`)
+  console.log(`Head.js Type: ${type}`)
   console.log(`Head.js: ${pageURL}`)
 
   const helmetContent = (
@@ -45,8 +45,8 @@ export default function Head(props) {
       <link rel="canonical" href={pageURL} />
       {/* <html lang="en" /> */}
 
-      <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
-      <meta name="description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
+      <title>{`Tennis Rankings | ${tour} ${type} Rankings`}</title>
+      <meta name="description" content={`${tour} ${type} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
       <meta property="og:title" content="ACE TENNIS RANKINGS" />
       <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
       <meta property="og:image" content={OGImage} />
@@ -55,8 +55,8 @@ export default function Head(props) {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@gameset_blog" />
-      <meta name="twitter:title" content={`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`} />
-      <meta name="twitter:description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
+      <meta name="twitter:title" content={`Tennis Rankings | ${tour} ${type} Rankings`} />
+      <meta name="twitter:description" content={`${tour} ${type} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
       <meta name="twitter:image" content={OGImage} />
 
     </>

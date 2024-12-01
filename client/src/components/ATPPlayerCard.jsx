@@ -7,7 +7,7 @@ import "./PlayerCard.css"
 
 export default function ATPPlayerCard(props) {
 
-  const { playerData, discipline, race, index } = props
+  const { playerData, type, index } = props
   
   return (
     <div className='player-card' key={`${playerData.ranking}${index}`}>
@@ -20,14 +20,14 @@ export default function ATPPlayerCard(props) {
 
           <ReactCountryFlag
             className="emojiFlag"
-            countryCode={ discipline === "Doubles" && race === "Race" ? playerData?.player1?.country ? convertISO3CountryCode(playerData?.player1?.country).ISO2 : "" : playerData?.country ? convertISO3CountryCode(playerData?.country).ISO2 : "" }
+            countryCode={ type.includes("Doubles") && type.includes("Race") ? playerData?.player1?.country ? convertISO3CountryCode(playerData?.player1?.country).ISO2 : "" : playerData?.country ? convertISO3CountryCode(playerData?.country).ISO2 : "" }
             style={{
               fontSize: '200%',
               lineHeight: '50px',
             }}
           />
 
-          {discipline === 'Doubles' && race === 'Race' ? 
+          {type.includes("Doubles") && type.includes("Race") ? 
             
               <>
               
@@ -53,13 +53,13 @@ export default function ATPPlayerCard(props) {
         </div>
 
         <div className='country-name-container'>
-            <p className='player-country'>{ discipline === "Doubles" && race === "Race" ? `${playerData?.player1?.country} / ${playerData?.player2?.country}`  : playerData?.country}</p>
+            <p className='player-country'>{ type.includes("Doubles") && type.includes("Race") ? `${playerData?.player1?.country} / ${playerData?.player2?.country}`  : playerData?.country}</p>
         </div>
 
       </div>
 
       <div className='player-name-container'>
-        <p className='player-name'>{(discipline === "Doubles" && race === "Race") ? `${playerData?.player1?.name} / ${playerData?.player2?.name}` : playerData?.name}</p>
+        <p className='player-name'>{(type.includes("Doubles") && type.includes("Race")) ? `${playerData?.player1?.name} / ${playerData?.player2?.name}` : playerData?.name}</p>
       </div>
 
       <p className='player-points'>{`${playerData.points} points`}</p>

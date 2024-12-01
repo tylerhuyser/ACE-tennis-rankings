@@ -8,7 +8,7 @@ import './Rankings.css'
 
 export default function Rankings (props) {
 
-  const { data, tour, discipline, race, loading } = props
+  const { data, tour, type, loading } = props
   
   return (
     <>
@@ -27,7 +27,7 @@ export default function Rankings (props) {
 
           <div className='rankings-hero-container'>
 
-            <h1 className='rankings-title'>{`${tour} ${discipline} ${race} Rankings`}</h1>
+            <h1 className='rankings-title'>{`${tour} ${type} Rankings`}</h1>
 
           </div>
 
@@ -38,8 +38,7 @@ export default function Rankings (props) {
                 {data.map((player, index) => (
                   <ATPPlayerCard
                     playerData={player}
-                    discipline={discipline}
-                    race={race}
+                    type={type}
                     index={index}
                     key={`${player.ranking}${index}`}
                 />))}       
@@ -49,8 +48,7 @@ export default function Rankings (props) {
                 {data.map((player, index) => (
                   <WTAPlayerCard
                     playerData={player}
-                    discipline={discipline}
-                    race={race}
+                    type={type}
                     index={index}
                     key={`${player.ranking}${index}`}
                   />

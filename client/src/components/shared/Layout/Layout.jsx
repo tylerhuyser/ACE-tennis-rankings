@@ -10,7 +10,7 @@ export default function Layout(props) {
 
   const { pageContext, setLoading } = props
 
-  const {tour, discipline, race } = props
+  const {tour, type } = props
 
   const [navVisibility, setNavVisibility] = useState(false)
   const [iconVisibility, setIconVisibility] = useState(false)
@@ -19,7 +19,7 @@ export default function Layout(props) {
 
     <>
 
-      <Head pageContext={pageContext} tour={tour} discipline={discipline} race={race}></Head>
+      <Head pageContext={pageContext} tour={tour} type={type}></Head>
 
       <div className='layout-container'>
 
