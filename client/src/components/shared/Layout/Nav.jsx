@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import "./Nav.css"
 
@@ -8,6 +8,30 @@ export default function Nav(props) {
   const { setLoading } = props
   const { navVisibility, setNavVisibility } = props
   const { iconVisibility, setIconVisibility } = props
+
+  const location = typeof window !== 'undefined' ? useLocation() : { pathname: '' }
+
+  const handleClick = (to) => {
+    if (location && location.pathname !== to) {
+      setLoading(true);
+      setNavVisibility(false);
+      setIconVisibility(false);
+    } else {
+      setNavVisibility(false);
+      setIconVisibility(false);
+    }
+  };
+
+  const navItems = [
+    { to: '/atp/singles', label: 'ATP Singles' },
+    { to: '/atp/doubles', label: 'ATP Doubles' },
+    { to: '/atp/singles-race', label: 'ATP Singles Race' },
+    { to: '/atp/doubles-race', label: 'ATP Doubles Race' },
+    { to: '/wta/singles', label: 'WTA Singles' },
+    { to: '/wta/doubles', label: 'WTA Doubles' },
+    { to: '/wta/singles-race', label: 'WTA Singles Race' },
+    { to: '/wta/doubles-race', label: 'WTA Doubles Race' },
+  ];
   
   return (
     <>
@@ -16,17 +40,17 @@ export default function Nav(props) {
         {/* External */}
         <a className='nav-link external-link' id="blog-link" href="https://gamesetblog.com" target="_blank">Tennis News</a>
 
-        {/* ATP */}
-        <Link to="/atp/singles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }} >ATP Singles</Link>
-        <Link to="/atp/doubles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>ATP Doubles</Link>
-        <Link to="/atp/singles-race" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>ATP Singles Race</Link>
-        <Link to="/atp/doubles-race" className='nav-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>ATP Doubles Race</Link>
-
-        {/* WTA */}
-        <Link to="/wta/singles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Singles</Link>
-        <Link to="/wta/doubles" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Doubles</Link>
-        <Link to="/wta/singles-race" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Singles Race</Link>
-        <Link to="/wta/doubles-race" className='nav-link internal-link' onClick={() => { setLoading(true), setNavVisibility(false), setIconVisibility(false) }}>WTA Doubles Race</Link>
+        {/* Internal Links */}
+        {navItems.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className={`nav-link internal-link ${location.pathname === item.to ? 'disabled' : ''}`}
+            onClick={() => handleClick(item.to)}
+          >
+            {item.label}
+          </Link>
+        ))}
 
       </div>
     </>

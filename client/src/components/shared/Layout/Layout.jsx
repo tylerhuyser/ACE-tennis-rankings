@@ -19,7 +19,7 @@ export default function Layout(props) {
 
     <>
 
-      <Head pageContext={pageContext} tour={tour} type={type}></Head>
+      {/* <Head pageContext={pageContext} tour={tour} type={type}></Head> */}
 
       <div className='layout-container'>
 

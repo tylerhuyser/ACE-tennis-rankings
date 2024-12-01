@@ -2,8 +2,8 @@ export { Page }
 
 import App from '../../App';
 
-function Page({ pageContext }) {
+function Page({ pageContext }, client) {
   return (
-      <App pageContext={pageContext}/>
+    <App pageContext={pageContext} client={client} />
   );
 }

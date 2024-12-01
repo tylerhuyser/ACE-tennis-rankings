@@ -19,9 +19,9 @@ export default function Header(props) {
   return (
     <div className='header-container'>
 
-      <div className='nav-visibility-icon-container'>
+      <div className='nav-visibility-icon-container' onClick={() => toggleVisibility(navVisibility, iconVisibility)} >
         
-        <div className={iconVisibility ? 'menu-icon open' :  'menu-icon closed'} onClick={() => toggleVisibility(navVisibility, iconVisibility)} >
+        <div className={iconVisibility ? 'menu-icon open' :  'menu-icon closed'} >
           <span className='menu-icon-line' id="line-1"></span>
           <span className='menu-icon-line' id="line-2"></span>
           <span className='menu-icon-line' id="line-3"></span>
