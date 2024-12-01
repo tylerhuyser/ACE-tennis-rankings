@@ -1,41 +1,52 @@
 export { onRenderHtml }
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import ReactDOMServer, { renderToString } from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+
 import { StaticRouter } from 'react-router-dom/server';
 import pkg from 'react-helmet-async';
 const { HelmetProvider } = pkg;
+import { PageContextProvider } from './usePageContext';
 
-
-async function onRenderHtml({ pageContext }) {
+// async removed below
+function onRenderHtml(pageContext) {
   
-  const { Page, pageProps, urlPathname } = pageContext
+  const { Page, urlPathname } = pageContext
+
+  if (!Page) throw new Error('My onRenderHtml() hook expects pageContext.Page to be defined')
+  if (!urlPathname) throw new Error('My onRenderHtml() hook expects pageContext.ulrPathname to be defined')
 
   const helmetContext = {}
 
-  const pageHtml = dangerouslySkipEscape(
-    renderToString(
-      <HelmetProvider context={helmetContext}>
-        <StaticRouter location={urlPathname}>
-          {/* <Page {...pageProps} data={pageContext.data} /> */}
+  console.log(pageContext.urlOriginal)
+
+  const pageHtml = ReactDOMServer.renderToString(
+    <HelmetProvider context={helmetContext}>
+      <StaticRouter location={urlPathname}>
+        <PageContextProvider pageContext={pageContext}>
           <Page pageContext={pageContext} />
-        </StaticRouter>
-      </HelmetProvider>
-    ),
+        </PageContextProvider>
+      </StaticRouter>
+    </HelmetProvider>
   )
 
   const { helmet } = helmetContext
 
-  return escapeInject`
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      ${dangerouslySkipEscape(helmet.title.toString())}
-      ${dangerouslySkipEscape(helmet.meta.toString())}
-    </head>
-    <body>
-      <div id="root">${pageHtml}</div>
-    </body>
-  </html>
-`}
+  const documentHtml = escapeInject`
+    <html lang="en">
+      <head>
+      </head>
+      <body>
+        <div id="react-root">${dangerouslySkipEscape(pageHtml)}</div>
+      </body>
+    </html>
+  `
+
+  return {
+    documentHtml,
+    pageContext: {
+
+    }
+  }
+}

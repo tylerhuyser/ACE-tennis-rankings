@@ -9,9 +9,6 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist', // Confirm the output directory
   },
-  // ssr: {
-  //   noExternal: ['react-helmet-async'],
-  // },
   passToClient: [
     'urlOriginal',
     'data'

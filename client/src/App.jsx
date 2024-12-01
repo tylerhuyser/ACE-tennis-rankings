@@ -33,7 +33,7 @@ function App({ pageContext }) {
     location = useLocation();
   }
 
-  let pathName = location?.pathname || '/'; // Default to '/' if no location is available
+  let pathName = location ? location.pathname : pageContext.urlOriginal || '/'
 
   const { tour, discipline, race } = useMemo(() => {
     const pathSegments = pathName.split('/');

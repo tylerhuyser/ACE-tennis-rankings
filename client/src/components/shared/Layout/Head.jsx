@@ -43,7 +43,7 @@ export default function Head(props) {
   const helmetContent = (
     <>
       <link rel="canonical" href={pageURL} />
-      <html lang="en" />
+      {/* <html lang="en" /> */}
 
       <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
       <meta name="description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />

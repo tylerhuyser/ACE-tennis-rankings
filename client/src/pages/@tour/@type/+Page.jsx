@@ -1,12 +1,16 @@
 export { Page }
 
 import App from '../../../App';
-import { useData } from '../../../renderer/useData'
-
-const { data } = useData
 
 function Page({ pageContext }) {
+
+  // console.log(`[Tour][Type] - +Page.jsx - PageContext.urlOriginal - ${pageContext.urlOriginal}`)
+  // console.log(`[Tour][Type] - +Page.jsx - PageContext.data.length - ${pageContext.data.length}`)
+  // console.log(`[Tour][Type] - +Page.jsx - PageContext.data - BEGIN`)
+  // console.log(pageContext.data[0])
+  // console.log(`[Tour][Type] - +Page.jsx - PageContext.data - END`)
+
   return (
-    <App pageContext={data} />
+      <App pageContext={pageContext} />
   );
 }
