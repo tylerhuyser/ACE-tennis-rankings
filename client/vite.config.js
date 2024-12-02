@@ -14,6 +14,6 @@ export default defineConfig(({ mode }) => ({
     'data'
   ],
   ssr: {
-    noExternal: ['react-helmet-async', 'vite', 'sirv'],
+    noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
   },
 }));
