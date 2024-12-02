@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite && npm run serve:dev",
-    "build": "npm install --legacy-peer-deps && vite build && cp ./src/server/server.js dist/ && cp ./src/server/root.js dist/  && cp ./public/_redirects ./dist/_redirects",
+    "build": "npm install --legacy-peer-deps && vite build && cp /server.js dist/ && cp /root.js dist/  && cp ./public/_redirects ./dist/_redirects",
     "serve:dev": "node ./src/server/server.js",
     "serve:prod": "NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
