@@ -1,7 +1,7 @@
 export { onRenderHtml }
 
 import React from 'react'
-import ReactDOMServer, { renderToString } from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 
 import { StaticRouter } from 'react-router-dom/server';
