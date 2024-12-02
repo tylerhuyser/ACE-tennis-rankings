@@ -1,12 +1,12 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 
-// Lazy-load Helmet only for Client-side Rendering (CSR)
-const HelmetLazy = React.lazy(() => import('react-helmet-async').then(module => ({ default: module.Helmet })));
+import { Helmet } from 'react-helmet-async'
 
 import OGImage from '../../../assets/ace-tennis-rankings-cover-photo.001.jpeg';
 
 export default function Head(props) {
-  const { tour = '', discipline = '', race = '', currentUrl = '' } = props;
+
+  const { pageContext, tour = '', type = '' } = props;
 
   const [isClient, setIsClient] = useState(false);
 
@@ -14,34 +14,33 @@ export default function Head(props) {
     setIsClient(true);
   }, []);
 
-  console.log(`Is Client? ${isClient}`);
-
   // Avoid rendering if necessary props are missing
-  if (!tour || !discipline) return null;
+  // if (!tour || !type) return null;
 
   let path = ''; 
   let pageURL = ''; 
 
   if (typeof window !== "undefined") {
-    // Client-side: use window.location
+    // Client-side:
     path = window.location.pathname;
     pageURL = `${window.location.origin}${path}`;
   } else {
-    // Server-side: use `currentUrl` passed as a prop or get it from req.originalUrl in the server
-    path = currentUrl;
-    pageURL = `https://rankings.gamesetblog.com${path}`;
+    // Server-side:
+    path = pageContext.urlOriginal;
+    console.log(`Head.js - SSR Path: ${path}`)
+    pageURL = process.env.NODE_ENV === 'production' ? `https://rankings.gamesetblog.com${path}` : `http://localhost:3000${path}`
   }
 
-  console.log(tour)
-  console.log(discipline)
+  // console.log(`Head.js Tour: ${tour}`)
+  // console.log(`Head.js Type: ${type}`)
+  // console.log(`Head.js: ${pageURL}`)
 
   const helmetContent = (
     <>
       <link rel="canonical" href={pageURL} />
-      <html lang="en" />
 
-      <title>{`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`}</title>
-      <meta name="description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
+      <title>{`Tennis Rankings | ${tour} ${type} Rankings`}</title>
+      <meta name="description" content={`${tour} ${type} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
       <meta property="og:title" content="ACE TENNIS RANKINGS" />
       <meta property="og:description" content="ATP and WTA Singles, Doubles, and Annual Race rankings." />
       <meta property="og:image" content={OGImage} />
@@ -50,23 +49,16 @@ export default function Head(props) {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@gameset_blog" />
-      <meta name="twitter:title" content={`Tennis Rankings | ${tour} ${discipline} ${race} Rankings`} />
-      <meta name="twitter:description" content={`${tour} ${discipline} ${race} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
+      <meta name="twitter:title" content={`Tennis Rankings | ${tour} ${type} Rankings`} />
+      <meta name="twitter:description" content={`${tour} ${type} Rankings | Browsing current singles, doubles, and annual race rankings for men's and women's tennis tours (ATP & WTA).`} />
       <meta name="twitter:image" content={OGImage} />
 
     </>
   );
 
-  if (!isClient) {
-    return <>{helmetContent}</>;
-  }
-
-  // For Client-Side Rendering (CSR)
   return (
-    <div>
-      <Suspense fallback={null}>
-        <HelmetLazy>{helmetContent}</HelmetLazy>
-      </Suspense>
-    </div>
-  );
+    <Helmet>
+      {helmetContent}
+    </Helmet>
+  )
 }

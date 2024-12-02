@@ -1,36 +1,49 @@
 export { onRenderHtml }
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+
 import { StaticRouter } from 'react-router-dom/server';
-import pkg from 'react-helmet-async';
-const { HelmetProvider } = pkg;
+import { HelmetProvider } from 'react-helmet-async';
+import { PageContextProvider } from './usePageContext';
 
-
-async function onRenderHtml(pageContext) {
+// async removed below
+function onRenderHtml(pageContext) {
   
-  const { Page, pageProps, urlPathname } = pageContext
+  const { Page, urlPathname } = pageContext
 
-  const pageHtml = dangerouslySkipEscape(
-    renderToString(
-      <HelmetProvider>
-        <StaticRouter location={urlPathname}>
-          <Page {...pageProps} />
-        </StaticRouter>
-      </HelmetProvider>
-    ),
+  if (!Page) throw new Error('My onRenderHtml() hook expects pageContext.Page to be defined')
+  if (!urlPathname) throw new Error('My onRenderHtml() hook expects pageContext.ulrPathname to be defined')
+
+  const helmetContext = {}
+
+  const pageHtml = ReactDOMServer.renderToString(
+    <HelmetProvider context={helmetContext}>
+      <StaticRouter location={urlPathname} future={{v7_relativeSplatPath: true, v7_startTransition: true}}>
+        <PageContextProvider pageContext={pageContext}>
+          <Page pageContext={pageContext} />
+        </PageContextProvider>
+      </StaticRouter>
+    </HelmetProvider>
   )
 
-  return escapeInject`
-    <!doctype html>
+  const { helmet } = helmetContext
+
+  const documentHtml = escapeInject`
     <html lang="en">
       <head>
-    @@ -8,6 +15,7 @@
       </head>
       <body>
-        <div id="root">${pageHtml}</div>
+        <div id="react-root">${dangerouslySkipEscape(pageHtml)}</div>
       </body>
     </html>
   `
+
+  return {
+    documentHtml,
+    pageContext: {
+
+    }
+  }
 }

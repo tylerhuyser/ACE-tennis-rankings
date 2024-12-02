@@ -1,12 +1,9 @@
 export { Page }
 
 import App from '../../App';
-import { useData } from '../../renderer/useData'
 
-const { data } = useData
-
-function Page(pageContext) {
+function Page({ pageContext }, client) {
   return (
-    <App pageContext={data}></App>
+    <App pageContext={pageContext} client={client} />
   );
 }

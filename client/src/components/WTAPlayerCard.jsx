@@ -6,7 +6,7 @@ import "./PlayerCard.css"
 
 export default function WTAPlayerCard(props) {
 
-  const { playerData, discipline, race, index } = props
+  const { playerData, type, index } = props
 
   return (
     <div className='player-card' key={`${playerData.ranking}${index}`}>
@@ -19,14 +19,14 @@ export default function WTAPlayerCard(props) {
 
           <ReactCountryFlag
             className="emojiFlag"
-            countryCode={ discipline === "Doubles" && race === "Race" ? playerData?.player1?.countryCode ? convertISO3CountryCode(playerData?.player1?.countryCode).ISO2 : "" : playerData?.player?.countryCode ? convertISO3CountryCode(playerData?.player?.countryCode).ISO2 : "" }
+            countryCode={ type.includes("Doubles") && type.includes("Race") ? playerData?.player1?.countryCode ? convertISO3CountryCode(playerData?.player1?.countryCode).ISO2 : "" : playerData?.player?.countryCode ? convertISO3CountryCode(playerData?.player?.countryCode).ISO2 : "" }
             style={{
               fontSize: '200%',
               lineHeight: '50px',
             }}
           />
 
-          {discipline === 'Doubles' && race === 'Race' ? 
+          {type.includes("Doubles") && type.includes("Race") ? 
             
               <>
               
@@ -52,13 +52,13 @@ export default function WTAPlayerCard(props) {
         </div>
 
         <div className='country-name-container'>
-            <p className='player-country'>{ discipline === "Doubles" && race === "Race" ? `${playerData?.player1?.countryCode} / ${playerData?.player2?.countryCode}`  : playerData?.player?.countryCode}</p>
+            <p className='player-country'>{ type.includes("Doubles") && type.includes("Race") ? `${playerData?.player1?.countryCode} / ${playerData?.player2?.countryCode}`  : playerData?.player?.countryCode}</p>
         </div>
 
       </div>
 
       <div className='player-name-container'>
-        <p className='player-name'>{(discipline === "Doubles" && race === "Race") ? `${playerData?.player1?.fullName} / ${playerData?.player2?.fullName}` : playerData?.player?.fullName}</p>
+        <p className='player-name'>{(type.includes("Doubles") && type.includes("Race")) ? `${playerData?.player1?.fullName} / ${playerData?.player2?.fullName}` : playerData?.player?.fullName}</p>
       </div>
 
       <p className='player-points'>{`${playerData.points} points`}</p>

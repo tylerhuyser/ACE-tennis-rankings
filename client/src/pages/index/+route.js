@@ -1,3 +1,3 @@
 export default '/'
 
-console.log('Base URL Route')
+console.log("Base URL Route: '/'")

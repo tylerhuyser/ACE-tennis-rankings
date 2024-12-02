@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build:client": "vite build",
-    "build:server": "vite build",
-    "build": "npm install --legacy-peer-deps && vite build && cp server.mjs dist/ && cp ./public/_redirects ./dist/_redirects",
-    "serve": "NODE_ENV=production node dist/server.mjs",
+    "dev": "vite && npm run serve:dev",
+    "build": "npm install --legacy-peer-deps && vite build && cp ./src/server/server.js dist/ && cp ./src/server/root.js dist/  && cp ./public/_redirects ./dist/_redirects",
+    "serve:dev": "node ./src/server/server.js",
+    "serve:prod": "NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "postbuild": "node sitemap-builder.cjs"
@@ -16,6 +15,8 @@
   "dependencies": {
     "@babel/core": "^7.26.0",
     "axios": "^1.7.7",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
     "country-code-converter": "^1.0.0",
     "express": "^4.21.1",
     "gulp": "^5.0.0",
@@ -29,6 +30,7 @@
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.28.0",
     "react-router-sitemap": "^1.2.0",
+    "sirv": "^3.0.0",
     "vike": "^0.4.203"
   },
   "devDependencies": {
