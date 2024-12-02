@@ -11,15 +11,15 @@ export default function Nav(props) {
 
   const location = typeof window !== 'undefined' ? useLocation() : { pathname: '' }
 
-  const handleClick = (to) => {
-    if (location && location.pathname !== to) {
-      setLoading(true);
-      setNavVisibility(false);
-      setIconVisibility(false);
+  const handleClick = (to, event) => {
+    if (location.pathname === to) {
+      // Prevent navigation if the link is disabled
+      event.preventDefault();
     } else {
-      setNavVisibility(false);
-      setIconVisibility(false);
+      setLoading(true);
     }
+    setNavVisibility(false);
+    setIconVisibility(false);
   };
 
   const navItems = [
@@ -45,8 +45,8 @@ export default function Nav(props) {
           <Link
             key={item.to}
             to={item.to}
-            className={`nav-link internal-link ${location.pathname === item.to ? 'disabled' : ''}`}
-            onClick={() => handleClick(item.to)}
+            className={`nav-link internal-link`}
+            onClick={(event) => handleClick(item.to, event)}
           >
             {item.label}
           </Link>

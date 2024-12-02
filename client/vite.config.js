@@ -12,5 +12,8 @@ export default defineConfig(({ mode }) => ({
   passToClient: [
     'urlOriginal',
     'data'
-  ]
+  ],
+  ssr: {
+    noExternal: ['react-helmet-async'],
+  },
 }));

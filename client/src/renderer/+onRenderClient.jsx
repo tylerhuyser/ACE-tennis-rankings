@@ -23,7 +23,7 @@ function onRenderClient(pageContext) {
   
   const page = (
     <HelmetProvider context={helmetContext}>
-      <BrowserRouter location={urlPathname}>
+      <BrowserRouter location={urlPathname} future={{v7_relativeSplatPath: true, v7_startTransition: true}} >
       <PageContextProvider pageContext={pageContext}>
           <Page pageContext={pageContext} />
         </PageContextProvider>

@@ -114,8 +114,6 @@ function App({ pageContext }, props) {
       setLoading(false)
     }
   }, [tour, type]);
-  
-  console.log(rankingsData[0])
 
   const routesConfig = [
     {path: "/"},

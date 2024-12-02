@@ -16,7 +16,7 @@ const paths = [
   let urlPathname = pageContext.urlPathname
 
   if (paths.includes(urlPathname)) {
-    console.log('Valid URL Path Matched')
+    console.log(`Valid URL Path Matched: ${urlPathname}`)
     return resolveRoute('/@tour/@type', urlPathname)
   } else if (!paths.includes(urlPathname) && urlPathname !== "/") {
     console.log('Invalid URL Path - Redirect to Root')

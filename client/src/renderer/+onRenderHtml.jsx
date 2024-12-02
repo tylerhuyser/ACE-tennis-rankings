@@ -5,8 +5,7 @@ import ReactDOMServer, { renderToString } from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 
 import { StaticRouter } from 'react-router-dom/server';
-import pkg from 'react-helmet-async';
-const { HelmetProvider } = pkg;
+import { HelmetProvider } from 'react-helmet-async';
 import { PageContextProvider } from './usePageContext';
 
 // async removed below
@@ -19,11 +18,9 @@ function onRenderHtml(pageContext) {
 
   const helmetContext = {}
 
-  console.log(pageContext.urlOriginal)
-
   const pageHtml = ReactDOMServer.renderToString(
     <HelmetProvider context={helmetContext}>
-      <StaticRouter location={urlPathname}>
+      <StaticRouter location={urlPathname} future={{v7_relativeSplatPath: true, v7_startTransition: true}}>
         <PageContextProvider pageContext={pageContext}>
           <Page pageContext={pageContext} />
         </PageContextProvider>
