@@ -1,6 +1,5 @@
 [build]
   clear_cache = true
-  functions = "netlify-functions"
 
 [build.environment]
   NODE_ENV = "production"
