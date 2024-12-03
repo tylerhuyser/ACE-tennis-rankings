@@ -20,13 +20,11 @@ if (isProduction) {
 } else {
   console.log('Development Environment');
 
-  const viteDevMiddleware = (
-    await createServer({
-      root,
-      server: { middlewareMode: true }
-    })
-  ).middlewares
-  app.use(viteDevMiddleware)
+  const vite = await createServer({
+    root,
+    server: { middlewareMode: 'html' },
+  });
+  app.use(vite.middlewares);
 
 }
 
