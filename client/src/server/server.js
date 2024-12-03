@@ -3,7 +3,7 @@ import ServerlessHttp from 'serverless-http'
 import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
-import { root } from './root.mjs'
+import { root } from './root.js'
 import sirv from 'sirv';
 import { createServer } from 'vite';
 const isProduction = process.env.NODE_ENV === 'production'
