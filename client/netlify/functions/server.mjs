@@ -3,12 +3,8 @@ import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
 import { root } from './root.mjs'
-// import sirvPackage from 'sirv'
-// const sirv = sirvPackage.default
 import sirv from 'sirv';
-// import vitePackage from 'vite';
-// const vite = vitePackage.default
-import vite from 'vite';
+import { createServer } from 'vite';
 const isProduction = process.env.NODE_ENV === 'production'
 
 startServer()
@@ -28,7 +24,7 @@ async function startServer() {
     console.log('Development Environment')
 
     const viteDevMiddleware = (
-      await vite.createServer({
+      await createServer({
         root,
         server: { middlewareMode: true }
       })
