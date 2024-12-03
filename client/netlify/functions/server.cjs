@@ -14,6 +14,7 @@ const root = path.resolve(__dirname, '..');
 const isProduction = process.env.NODE_ENV === 'production';
 
 if (isProduction) {
+  console.log('Production Environment')
   app.use(sirv(`${root}/dist/client`));
 } else {
   console.log('Development Environment');
