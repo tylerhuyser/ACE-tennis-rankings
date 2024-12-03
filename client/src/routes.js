@@ -1,5 +1,5 @@
 // src/routes.js
-const routes = [
+export const routes = [
   { path: "/" },
   { path: "/atp/singles" },
   { path: "/atp/singles-race" },
@@ -10,6 +10,3 @@ const routes = [
   { path: "/wta/doubles" },
   { path: "/wta/doubles-race" }
 ];
-
-// Use module.exports to export the routes array
-module.exports = routes;

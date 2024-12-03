@@ -1,6 +1,6 @@
 import SitemapPackage from 'react-router-sitemap'
 const Sitemap = SitemapPackage.default
-import routes from './src/routes.cjs'
+import { routes } from './src/routes.js'
 
 // Initialize the sitemap generator
 new Sitemap(routes)
