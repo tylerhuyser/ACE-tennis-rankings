@@ -1,10 +1,10 @@
 import express from 'express'
-// import compression from 'compression'
+import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
-import { root } from './root.js'
+import { root } from './root.mjs'
 import sirv from 'sirv';
-import vite from 'vite';
+import { createServer } from 'vite';
 const isProduction = process.env.NODE_ENV === 'production'
 
 startServer()
@@ -14,7 +14,7 @@ async function startServer() {
   const app = express()
 
   app.use(cors())
-  // app.use(compression())
+  app.use(compression())
 
   if (isProduction) {
     console.log('Production Environment')
@@ -24,7 +24,7 @@ async function startServer() {
     console.log('Development Environment')
 
     const viteDevMiddleware = (
-      await vite.createServer({
+      await createServer({
         root,
         server: { middlewareMode: true }
       })
