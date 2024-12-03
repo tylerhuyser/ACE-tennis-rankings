@@ -1,5 +1,7 @@
 [build]
   clear_cache = true
+  functions = "netlify/functions"
+  node_bundler = "esbuild"
 
 [build.environment]
   NODE_ENV = "production"
@@ -11,4 +13,4 @@
   force = true
 
 [functions]
-node_bundler = "esbuild"
+  node_bundler = "esbuild"
