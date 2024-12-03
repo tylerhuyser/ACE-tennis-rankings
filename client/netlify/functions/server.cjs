@@ -12,6 +12,10 @@ app.use(compression());
 
 const root = path.resolve(__dirname, '..');
 
+console.log(`Root Path: ${root}}`)
+const distPath = path.join(root, 'dist', 'client');
+console.log('Dist path:', distPath);  // Verify this path points to the correct directory
+
 const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   app.use(sirv(`${root}/dist/client`));
