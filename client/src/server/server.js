@@ -1,5 +1,4 @@
 import express from 'express'
-import ServerlessHttp from 'serverless-http'
 import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
@@ -8,7 +7,9 @@ import sirv from 'sirv';
 import { createServer } from 'vite';
 const isProduction = process.env.NODE_ENV === 'production'
 
+startServer()
 
+async function startServer() {
 
   const app = express()
 
@@ -59,4 +60,4 @@ const isProduction = process.env.NODE_ENV === 'production'
   app.listen(port)
   console.log(`NEW Server running at http://localhost:${port}`)
 
-  export const handler = serverless(app)
+}
