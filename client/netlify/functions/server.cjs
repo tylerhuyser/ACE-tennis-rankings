@@ -12,9 +12,12 @@ app.use(compression());
 
 // console.log(`Path (below)`)
 // console.log(path)
-const root = path.resolve(__dirname, '../../../');
+const root = path.resolve(__dirname, '../../../../../');
 
 console.log(`Root Path: ${root}`)
+
+const buildPath = path.resolve(__dirname, '../../dist/client');  // Modify this as necessary
+console.log(`Build Path: ${buildPath}`);
 
 app.use(sirv(`${root}/dist/client`));
 
