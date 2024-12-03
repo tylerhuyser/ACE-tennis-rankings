@@ -1,5 +1,5 @@
 import express from 'express'
-import compression from 'compression'
+// import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
 import { root } from './root.js'
@@ -14,7 +14,7 @@ async function startServer() {
   const app = express()
 
   app.use(cors())
-  app.use(compression())
+  // app.use(compression())
 
   if (isProduction) {
     console.log('Production Environment')
