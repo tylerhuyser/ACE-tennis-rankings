@@ -2,7 +2,7 @@ import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
-import { root } from './root.js'
+import { root } from './root.mjs'
 const isProduction = process.env.NODE_ENV === 'production'
 
 startServer()
