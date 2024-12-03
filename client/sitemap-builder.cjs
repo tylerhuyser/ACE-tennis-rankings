@@ -1,5 +1,5 @@
-import { Sitemap } from 'react-router-sitemap';
-import routes from './src/routes.cjs'; // Assuming your routes file can still be CommonJS
+const Sitemap = require('react-router-sitemap').default;
+const routes = require('./src/routes.cjs'); // This is where your routes are defined (we'll set this up below)
 
 // Initialize the sitemap generator
 new Sitemap(routes)
