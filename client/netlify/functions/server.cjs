@@ -12,8 +12,13 @@ app.use(compression());
 
 const root = path.resolve(__dirname, '..');
 
-app.use(sirv(`${root}/dist/client`));
-
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  app.use(sirv(`${root}/dist/client`));
+} else {
+  console.log('Development Environment');
+  // Add any necessary development middleware
+}
 app.get('*', async (req, res) => {
   const pageContextInit = {
     urlOriginal: req.originalUrl,
