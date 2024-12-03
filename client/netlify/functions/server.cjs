@@ -19,13 +19,18 @@ if (isProduction) {
   app.use(sirv(`${root}/dist/client`));
 } else {
   console.log('Development Environment');
+  setupViteMiddleware().then(startApp).catch((err) => {
+    console.error('Error setting up Vite middleware:', err);
+    process.exit(1);
+  });
+}
 
+async function setupViteMiddleware() {
   const vite = await createServer({
     root,
     server: { middlewareMode: 'html' },
   });
   app.use(vite.middlewares);
-
 }
 
 app.get('*', async (req, res) => {
