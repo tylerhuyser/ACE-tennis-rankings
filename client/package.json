@@ -22,6 +22,7 @@
     "express": "^4.21.1",
     "gulp": "^5.0.0",
     "install": "^0.13.0",
+    "lightningcss": "^1.28.2",
     "node-fetch": "^3.3.2",
     "npm": "^10.9.0",
     "prop-types": "^15.8.1",

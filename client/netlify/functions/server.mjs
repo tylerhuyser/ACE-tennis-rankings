@@ -3,12 +3,12 @@ import compression from 'compression'
 import cors from 'cors'
 import { renderPage } from 'vike/server'
 import { root } from './root.mjs'
-import sirvPackage from 'sirv'
-const sirv = sirvPackage.default
-// import sirv from 'sirv';
-import vitePackage from 'vite';
-// import vite from 'vite';
-const vite = vitePackage.default
+// import sirvPackage from 'sirv'
+// const sirv = sirvPackage.default
+import sirv from 'sirv';
+// import vitePackage from 'vite';
+// const vite = vitePackage.default
+import vite from 'vite';
 const isProduction = process.env.NODE_ENV === 'production'
 
 startServer()

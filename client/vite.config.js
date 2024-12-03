@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     'data'
   ],
   ssr: {
-    external: ['vike'],
+    external: ['vike', 'esbuild', 'lightningcss'],
     noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
   },
 }));
