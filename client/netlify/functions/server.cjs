@@ -6,16 +6,14 @@ const sirv = require('sirv');
 const { renderPage } = require('vike/server');
 const path = require('path');
 const app = express();
+
 app.use(cors());
 app.use(compression());
+
 const root = path.resolve(__dirname, '..');
-const isProduction = process.env.NODE_ENV === 'production';
-if (isProduction) {
-  app.use(sirv(`${root}/dist/client`));
-} else {
-  console.log('Development Environment');
-  // Add any necessary development middleware
-}
+
+app.use(sirv(`${root}/dist/client`));
+
 app.get('*', async (req, res) => {
   const pageContextInit = {
     urlOriginal: req.originalUrl,
