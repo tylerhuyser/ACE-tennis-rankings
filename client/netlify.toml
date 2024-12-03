@@ -3,6 +3,7 @@
 
 [build]
   clear_cache = true
+  publish = "dist/client"
   functions = "netlify/functions"
   node_bundler = "esbuild"
 

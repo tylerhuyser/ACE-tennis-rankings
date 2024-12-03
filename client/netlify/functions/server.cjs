@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(compression());
 
-const root = path.resolve(__dirname, '../../../');
+const root = path.resolve(__dirname, '../../dist');
 
 console.log('Production Environment')
 app.use(sirv(`${root}/dist/client`));
