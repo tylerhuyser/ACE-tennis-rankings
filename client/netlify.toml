@@ -1,3 +1,6 @@
+[dev]
+  targetPort = 3001
+
 [build]
   clear_cache = true
   functions = "netlify/functions"
@@ -6,15 +9,14 @@
 [build.environment]
   NODE_ENV = "production"
 
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/sitemap_index.xml"
   to = "/sitemap.xml"
   status = 301
   force = true
 
-[functions]
-  external_node_modules = ["express"]
-  node_bundler = "esbuild"
-
-[dev]
-  targetPort = 3001

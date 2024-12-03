@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.7.7",
     "compression": "^1.7.5",
     "cors": "^2.8.5",
@@ -22,6 +23,7 @@
     "gulp": "^5.0.0",
     "install": "^0.13.0",
     "lightningcss": "^1.28.2",
+    "netlify-lambda": "^2.0.16",
     "npm": "^10.9.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
@@ -30,10 +32,10 @@
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.28.0",
     "react-router-sitemap": "^1.2.0",
+    "serverless-http": "^3.2.0",
     "sirv": "^3.0.0",
     "vike": "^0.4.203",
-    "vite": "^5.4.10",
-    "@vitejs/plugin-react": "^4.3.4"
+    "vite": "^5.4.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
