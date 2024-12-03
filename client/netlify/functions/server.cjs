@@ -3,7 +3,7 @@ const serverless = require('serverless-http');
 const compression = require('compression');
 const cors = require('cors');
 const sirv = require('sirv');
-import { createServer } from 'vite';
+const { createServer } = require('vite');
 const { renderPage } = require('vike/server');
 const path = require('path');
 
