@@ -1,58 +1,44 @@
-import express from 'express'
-import compression from 'compression'
-import cors from 'cors'
-import { renderPage } from 'vike/server'
-import { root } from './root.mjs'
-import sirv from 'sirv';
-import { createServer } from 'vite';
-const isProduction = process.env.NODE_ENV === 'production'
-
-
-  const app = express()
-
-  app.use(cors())
-  app.use(compression())
-
-  if (isProduction) {
-    console.log('Production Environment')
-    app.use(sirv(`${root}/dist/client`))
-  } else {
-
-    console.log('Development Environment')
-
-    const viteDevMiddleware = (
-      await createServer({
-        root,
-        server: { middlewareMode: true }
-      })
-    ).middlewares
-    app.use(viteDevMiddleware)
-    
+import express from 'express';
+import { renderPage } from 'vike/server'; // Ensure vike is installed
+// Fix for Helmet import
+import pkg from 'react-helmet-async';
+const { Helmet } = pkg; // Use default import and destructure
+const app = express();
+// Serve static files in production (adjust paths as needed)
+app.use(express.static('dist/client'));
+// SSR route
+app.get('*', async (req, res, next) => {
+  const url = req.originalUrl;
+  
+  try {
+    const result = await renderPage({ urlOriginal: url });
+    // If nothing is rendered, forward the request to the next middleware
+    if (result.nothingRendered) return next();
+    // Handle errors during rendering
+    if (result.errorWhileRendering) {
+      console.error(result.errorWhileRendering);
+      return res.status(500).send('Internal Server Error');
+    }
+    // Check if the result contains HTML before proceeding
+    if (!result.html) {
+      console.warn('No HTML generated for the requested URL:', url);
+      return res.redirect(302, '/'); // Redirect to root for invalid cases
+    }
+    // Pass `currentUrl` to the Head component
+    const html = result.html.replace(
+      '</head>',
+      `<script>
+        window.__CURRENT_URL__ = "${url}";
+      </script></head>`
+    );
+    res.status(result.statusCode).send(html);
+  } catch (err) {
+    console.error('Unexpected error during rendering:', err);
+    res.status(500).send('Internal Server Error');
   }
-
-  app.get('*', async (req, res) => {
-
-    const pageContextInit = {
-      urlOriginal: req.originalUrl,
-      headersOriginal: req.headers
-    }
-    const pageContext = await renderPage(pageContextInit)
-
-    if (pageContext.errorWhileRendering) {
-      // Install error tracking here, see https://vike.dev/error-tracking
-      // Vike Automatically calls 'console.log(error), when an error occurs, so this code is not needed.
-    }
-
-    const { httpResponse } = pageContext
-
-    if (res.writeEarlyHints) res.writeEarlyHints({ link: httpResponse.earlyHints.map((e) => e.earlyHintLink) })
-    httpResponse.headers.forEach(([name, value]) => res.setHeader(name, value))
-    res.status(httpResponse.statusCode)
-    // For HTTP streams use pageContext.httpResponse.pipe() instead, see https://vike.dev/streaming
-    res.send(httpResponse.body)
-  })
-
-
-  const port = process.env.PORT || 3000
-  app.listen(port)
-  console.log(`NEW Server running at http://localhost:${port}`)
+});
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
