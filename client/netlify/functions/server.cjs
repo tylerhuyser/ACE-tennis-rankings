@@ -18,7 +18,15 @@ if (isProduction) {
   app.use(sirv(`${root}/dist/client`));
 } else {
   console.log('Development Environment');
-  // Add any necessary development middleware
+
+  const viteDevMiddleware = (
+    await createServer({
+      root,
+      server: { middlewareMode: true }
+    })
+  ).middlewares
+  app.use(viteDevMiddleware)
+
 }
 
 app.get('*', async (req, res) => {
@@ -29,13 +37,18 @@ app.get('*', async (req, res) => {
 
   const pageContext = await renderPage(pageContextInit);
 
-  const { httpResponse } = pageContext;
-  if (!httpResponse) {
-    res.status(404).send('Page not found');
-    return;
+  if (pageContext.errorWhileRendering) {
+    // Install error tracking here, see https://vike.dev/error-tracking
+    // Vike Automatically calls 'console.log(error), when an error occurs, so this code is not needed.
   }
 
-  res.status(httpResponse.statusCode).send(httpResponse.body);
+  const { httpResponse } = pageContext;
+
+    if (res.writeEarlyHints) res.writeEarlyHints({ link: httpResponse.earlyHints.map((e) => e.earlyHintLink) })
+    httpResponse.headers.forEach(([name, value]) => res.setHeader(name, value))
+    res.status(httpResponse.statusCode)
+    // For HTTP streams use pageContext.httpResponse.pipe() instead, see https://vike.dev/streaming
+    res.send(httpResponse.body)
 });
 
 module.exports.handler = serverless(app);
