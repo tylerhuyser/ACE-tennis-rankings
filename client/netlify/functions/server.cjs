@@ -10,9 +10,9 @@ const app = express();
 app.use(cors());
 app.use(compression());
 
-console.log(`Path (below)`)
-console.log(path)
-const root = path.resolve(__dirname, '../../');
+// console.log(`Path (below)`)
+// console.log(path)
+const root = path.resolve(__dirname, '../../../');
 
 console.log(`Root Path: ${root}`)
 
