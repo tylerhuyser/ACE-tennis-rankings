@@ -1,5 +1,6 @@
-const Sitemap = require('react-router-sitemap').default;
-const routes = require('./src/routes.cjs'); // This is where your routes are defined (we'll set this up below)
+import SitemapPackage from 'react-router-sitemap'
+const Sitemap = SitemapPackage.default
+import routes from './src/routes.cjs'
 
 // Initialize the sitemap generator
 new Sitemap(routes)

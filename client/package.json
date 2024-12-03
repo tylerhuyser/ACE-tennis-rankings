@@ -10,10 +10,11 @@
     "serve:prod": "NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "postbuild": "node sitemap-builder.cjs"
+    "postbuild": "node sitemap-builder.mjs"
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.7.7",
     "compression": "^1.7.5",
     "cors": "^2.8.5",
@@ -32,8 +33,7 @@
     "react-router-sitemap": "^1.2.0",
     "sirv": "^3.0.0",
     "vike": "^0.4.203",
-    "vite": "^5.4.10",
-    "@vitejs/plugin-react": "^4.3.4"
+    "vite": "^5.4.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
