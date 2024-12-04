@@ -10,6 +10,9 @@
 [build.environment]
   NODE_ENV = "production"
 
+[[plugins]]
+package = @netlify/vite-plugin-netlify-edge
+
 [functions]
   external_node_modules = ["express"]
   node_bundler = "esbuild"
