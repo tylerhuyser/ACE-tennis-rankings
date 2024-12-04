@@ -14,6 +14,13 @@ export default defineConfig(({ mode }) => ({
   plugins: [react(), vike(), netlifyEdge(), Sitemap({ hostname: 'https://rankings.gamesetblog.com', dynamicRoutes, changefreq: 'weekly' }), Inspect()],
   build: {
     outDir: 'dist', // Confirm the output directory
+    rollupOptions: {
+      external: [
+        "react-router-dom",
+        "prop-types",
+        "axios"
+      ],
+    },
   },
   ssr: {
     noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],

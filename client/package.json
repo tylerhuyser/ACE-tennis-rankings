@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "clean": "rm -rf dist",
     "dev": "vite && npm run serve:dev",
     "build": "npm install --legacy-peer-deps && vite build && cp ./src/server/server.js dist/ && cp ./src/server/root.js dist/  && cp ./public/_redirects ./dist/_redirects",
     "serve:dev": "node ./src/server/server.js",
