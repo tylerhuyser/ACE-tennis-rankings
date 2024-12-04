@@ -22,52 +22,6 @@
   force = true
 
 [[redirects]]
-  from = "https://www.rankings.gamesetblog.com/*"
-  to = "https://rankings.gamesetblog.com/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/atp/singles"
-  to = "/dist/client/atp/singles/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/atp/singles-race"
-  to = "/dist/client/atp/singles-race/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/atp/doubles"
-  to = "/dist/client/atp/doubles/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/atp/doubles-race"
-  to = "/dist/client/atp/doubles-race/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/wta/singles"
-  to = "/dist/client/wta/singles/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/wta/singles-race"
-  to = "/dist/client/wta/singles-race/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/wta/doubles"
-  to = "/dist/client/wta/doubles/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/wta/doubles-race"
-  to = "/dist/client/wta/doubles-race/index.html"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
