@@ -2,7 +2,7 @@ export { onRenderHtml }
 
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import { escapeInject, dangerouslySkipEscape } from 'vike/server.js'
 
 import { StaticRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
