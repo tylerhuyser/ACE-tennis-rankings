@@ -57,12 +57,17 @@ app.get('*', async (req, res) => {
     return;
   }
 
-  // Set headers from httpResponse
-  httpResponse.headers?.forEach(([key, value]) => {
-    res.setHeader(key, value);
-  });
+  // // Set headers from httpResponse
+  // httpResponse.headers?.forEach(([key, value]) => {
+  //   res.setHeader(key, value);
+  // });
 
-  res.status(httpResponse.statusCode).send(httpResponse.body);
+  // res.status(httpResponse.statusCode).send(httpResponse.body);
+  if (res.writeEarlyHints) res.writeEarlyHints({ link: httpResponse.earlyHints.map((e) => e.earlyHintLink) })
+    httpResponse.headers.forEach(([name, value]) => res.setHeader(name, value))
+    res.status(httpResponse.statusCode)
+    // For HTTP streams use pageContext.httpResponse.pipe() instead, see https://vike.dev/streaming
+    res.send(httpResponse.body)
 });
 
 module.exports.handler = serverless(app);

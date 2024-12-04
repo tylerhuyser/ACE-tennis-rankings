@@ -26,7 +26,7 @@ export default function Head(props) {
     pageURL = `${window.location.origin}${path}`;
   } else {
     // Server-side:
-    path = pageContext.urlOriginal;
+    path = pageContext.urlOriginal.replace(/\/index\.pageContext\.json$/, '');
     console.log(`Head.js - SSR Path: ${path}`)
     pageURL = process.env.NODE_ENV === 'production' ? `https://rankings.gamesetblog.com${path}` : `http://localhost:3000${path}`
   }

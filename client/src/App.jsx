@@ -44,7 +44,7 @@ function App({ pageContext }, props) {
     if (typeof window !== "undefined") {
       return location.pathname;
     } else {
-      return pageContext.urlOriginal || "/";
+      return pageContext.urlOriginal.replace(/\/index\.pageContext\.json$/, '') || "/";
     }
   }, [location, pageContext]);
   
