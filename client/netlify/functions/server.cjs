@@ -1,4 +1,4 @@
-const { renderPage } = require('vite-plugin-ssr/server');
+const { renderPage } = require('vike/server');
 
 exports.handler = async (event, context) => {
   const urlOriginal = event.rawUrl.replace(`${event.headers['x-forwarded-proto']}://${event.headers.host}`, '');
