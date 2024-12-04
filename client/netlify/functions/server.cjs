@@ -11,7 +11,7 @@ const { root } = require('../../src/server/root')
 app.use(cors());
 app.use(compression());
 
-const sirv = (await import('sirv')).default
+const sirv = (await require('sirv').default)
 app.use(sirv(`${root}/dist/client`))
 
 app.get('*', async (req, res) => {
