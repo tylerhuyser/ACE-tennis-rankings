@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     alias: {
-      'vike/server': '/node_modules/vike/dist/esm/server/index.js'
+      'vike/server': '/node_modules/vike/dist/esm/node/runtime/index.js'
     }
   }
 }));
