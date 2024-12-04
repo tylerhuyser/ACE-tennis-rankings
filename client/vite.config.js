@@ -6,7 +6,7 @@ import netlifyEdge from '@netlify/vite-plugin-netlify-edge'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   base: '/',
-  plugins: [react(), vike(), netlifyEdge()],
+  plugins: [react(), vike()],
   build: {
     outDir: 'dist', // Confirm the output directory
   },
