@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { childrenPropType } from './PropTypeValues'
 
 const Context = React.createContext(undefined)
-
+ 
 PageContextProvider.propTypes = {
   pageContext: PropTypes.any,
   children: childrenPropType
