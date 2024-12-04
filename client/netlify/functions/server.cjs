@@ -40,8 +40,6 @@ app.get('*', async (req, res) => {
     return;
   }
 
-  pageContext.httpResponse.headers.set('Content-Type', 'application/json');
-
 
   const { httpResponse } = pageContext;
 
@@ -50,11 +48,11 @@ app.get('*', async (req, res) => {
   //   return;
   // }
 
-  if (isPageContextRequest) {
-    // Set Content-Type for JSON responses
+  const isJsonRequest = req.originalUrl.endsWith('.json');
+  if (isJsonRequest) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(pageContext);
-    return;
+  } else {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
   }
 
   if (!httpResponse) {
