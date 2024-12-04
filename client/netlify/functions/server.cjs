@@ -32,6 +32,7 @@ app.get('*', async (req, res) => {
   // console.log(`Page Context END`)
   
   if (!pageContext) {
+    console.log(`No Page Context - 404 Delivered`)
     res.status(404).send('Page not found');
     return;
   }
@@ -46,6 +47,7 @@ app.get('*', async (req, res) => {
   }
 
   if (!httpResponse) {
+    console.log(`No HTTPResponse - 404 Delivered`)
     res.status(404).send('Page not found');
     return;
   }
