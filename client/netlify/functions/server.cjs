@@ -24,11 +24,16 @@ app.get('*', async (req, res) => {
       : req.originalUrl,
     headersOriginal: req.headers,
   };
+
+  console.log(`PageContextInit BEGIN`)
+  console.log(pageContextInit)
+  console.log(`PageContextInit END`)
+
   const pageContext = await renderPage(pageContextInit);
 
-  console.log(`Page Context BEGIN`)
-  console.log(pageContext)
-  console.log(`Page Context END`)
+  // console.log(`Page Context BEGIN`)
+  // console.log(pageContext)
+  // console.log(`Page Context END`)
   
   if (!pageContext) {
     res.status(404).send('Page not found');
