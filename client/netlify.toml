@@ -21,7 +21,7 @@
   status = 301
   force = true
 
-  [[redirects]]
+[[redirects]]
   from = "https://www.rankings.gamesetblog.com/*"
   to = "https://rankings.gamesetblog.com/:splat"
   status = 301

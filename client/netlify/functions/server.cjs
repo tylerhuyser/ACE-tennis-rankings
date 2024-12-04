@@ -11,6 +11,9 @@ app.use(cors());
 app.use(compression());
 
 app.get('*', async (req, res) => {
+
+  console.log(req.originalUrl)
+
   const pageContextInit = {
     urlOriginal: req.originalUrl,
     headersOriginal: req.headers,
