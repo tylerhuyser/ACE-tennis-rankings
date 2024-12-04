@@ -1,27 +1,68 @@
-const { builder } = require('@netlify/functions')
-const { renderPage } = require("vike/server");
+const express = require('express');
+const serverless = require('serverless-http');
+const compression = require('compression');
+const cors = require('cors');
+const { renderPage } = require('vike/server');
+const app = express();
 
-const handler = async (event, context) => {
-  try {
-    const pageContext = await renderPage({ urlOriginal: event.rawUrl });
-    if (!pageContext.httpResponse) {
-      return { statusCode: 200 };
-    }
+app.use(cors());
+app.use(compression());
 
-    console.log(pageContext.httpResponse.statusCode, event.rawUrl);
+app.get('*', async (req, res) => {
 
-    return {
-      statusCode: pageContext.httpResponse.statusCode,
-      headers: { "Content-Type": pageContext.httpResponse.contentType },
-      body: pageContext.httpResponse.body,
-    };
-  } catch (error) {
-    console.error("Error rendering page:", error);
-    return {
-      statusCode: 500,
-      body: "Internal Server Error",
-    };
+  const isPageContextRequest = req.originalUrl.endsWith('.pageContext.json');
+
+  console.log(`Req.originalURL BEGIN`)
+  console.log(req.originalUrl)
+  console.log(`Req.originalURL END`)
+
+  const pageContextInit = {
+    urlOriginal: req.originalUrl,
+    headersOriginal: req.headers,
+  };
+
+  // console.log(`PageContextInit BEGIN`)
+  // console.log(pageContextInit)
+  // console.log(`PageContextInit END`)
+
+  const pageContext = await renderPage(pageContextInit);
+
+  // console.log(`Page Context BEGIN`)
+  // console.log(pageContext)
+  // console.log(`Page Context END`)
+  
+  if (!pageContext) {
+    console.log(`No Page Context - 404 Delivered`)
+    res.status(404).send('Page not found');
+    return;
   }
-};
 
-exports.handler = builder(handler)
+  const { httpResponse } = pageContext;
+
+  console.log(`httpResponse BEGIN`)
+  console.log(httpResponse)
+  console.log(`httpResponse END`)
+
+
+  const isJsonRequest = req.originalUrl.endsWith('.json');
+  if (isJsonRequest) {
+    res.setHeader('Content-Type', 'application/json');
+  } else {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  }
+
+  if (!httpResponse) {
+    console.log(`No HTTPResponse - 404 Delivered`)
+    res.status(404).send('Page not found');
+    return;
+  }
+
+  // Set headers from httpResponse
+  httpResponse.headers?.forEach(([key, value]) => {
+    res.setHeader(key, value);
+  });
+
+  res.status(httpResponse.statusCode).send(httpResponse.body);
+});
+
+module.exports.handler = serverless(app);
