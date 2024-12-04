@@ -32,7 +32,6 @@
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.28.0",
-    "react-router-sitemap": "^1.2.0",
     "serverless-http": "^3.2.0",
     "sirv": "^3.0.0",
     "vike": "^0.4.203",
@@ -46,6 +45,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0"
+    "globals": "^15.11.0",
+    "vite-plugin-sitemap": "^0.7.1"
   }
 }
