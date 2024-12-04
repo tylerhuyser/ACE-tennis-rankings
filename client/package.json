@@ -9,8 +9,7 @@
     "serve:dev": "node ./src/server/server.js",
     "serve:prod": "NODE_ENV=production node dist/server.js",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "postbuild": "node sitemap-builder.mjs"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@babel/core": "^7.26.0",

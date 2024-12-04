@@ -10,7 +10,7 @@ const dynamicRoutes = routesArray
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   base: '/',
-  plugins: [react(), vike(), Sitemap({ hostname: 'https://rankings.gamesetblog.com', dynamicRoutes })],
+  plugins: [react(), vike(), Sitemap({ hostname: 'https://rankings.gamesetblog.com', dynamicRoutes, changefreq: 'weekly' })],
   build: {
     outDir: 'dist', // Confirm the output directory
   },
