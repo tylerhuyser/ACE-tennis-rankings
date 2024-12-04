@@ -40,6 +40,9 @@ app.get('*', async (req, res) => {
     return;
   }
 
+  pageContext.httpResponse.headers.set('Content-Type', 'application/json');
+
+
   const { httpResponse } = pageContext;
 
   // if (!httpResponse) {
