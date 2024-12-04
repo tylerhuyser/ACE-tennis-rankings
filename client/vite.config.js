@@ -4,6 +4,7 @@ import vike from 'vike/plugin'
 import netlifyEdge from '@netlify/vite-plugin-netlify-edge'
 import Sitemap from 'vite-plugin-sitemap'
 import { routesArray } from './src/routes.js'
+import Inspect from 'vite-plugin-inspect';
 
 const dynamicRoutes = routesArray
 
