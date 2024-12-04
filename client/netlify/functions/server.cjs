@@ -21,9 +21,9 @@ app.get('*', async (req, res) => {
     headersOriginal: req.headers,
   };
 
-  console.log(`PageContextInit BEGIN`)
-  console.log(pageContextInit)
-  console.log(`PageContextInit END`)
+  // console.log(`PageContextInit BEGIN`)
+  // console.log(pageContextInit)
+  // console.log(`PageContextInit END`)
 
   const pageContext = await renderPage(pageContextInit);
 
@@ -38,6 +38,11 @@ app.get('*', async (req, res) => {
   }
 
   const { httpResponse } = pageContext;
+
+  console.log(`httpResponse BEGIN`)
+  console.log(httpResponse)
+  console.log(`httpResponse END`)
+
 
   const isJsonRequest = req.originalUrl.endsWith('.json');
   if (isJsonRequest) {
