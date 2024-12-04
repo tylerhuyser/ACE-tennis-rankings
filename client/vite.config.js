@@ -22,4 +22,9 @@ export default defineConfig(({ mode }) => ({
   ssr: {
     noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
   },
+  resolve: {
+    alias: {
+      'vike/server': '/node_modules/vike/dist/esm/server/index.js'
+    }
+  }
 }));
