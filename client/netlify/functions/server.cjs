@@ -20,7 +20,8 @@ app.get('*', async (req, res) => {
 
   const pageContextInit = {
     urlOriginal: isPageContextRequest
-    ? req.originalUrl.replace(/\/index\.pageContext\.json$/, ''),
+      ? req.originalUrl.replace(/\/index\.pageContext\.json$/, '')
+      : req.originalUrl,
     headersOriginal: req.headers,
   };
   const pageContext = await renderPage(pageContextInit);
