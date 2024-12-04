@@ -20,6 +20,7 @@ function onRenderClient(pageContext) {
 
   const container = document.getElementById('react-root')
   if (!container) throw new Error('DOM element #react-root not found')
+
   
   const page = (
     <HelmetProvider context={helmetContext}>

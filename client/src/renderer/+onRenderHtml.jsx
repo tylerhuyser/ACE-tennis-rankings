@@ -18,6 +18,8 @@ function onRenderHtml(pageContext) {
 
   const helmetContext = {}
 
+  console.log('+onRenderHTML.jsx')
+
   const pageHtml = ReactDOMServer.renderToString(
     <HelmetProvider context={helmetContext}>
       <StaticRouter location={urlPathname} future={{v7_relativeSplatPath: true, v7_startTransition: true}}>

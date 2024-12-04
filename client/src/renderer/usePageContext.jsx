@@ -19,6 +19,7 @@ function PageContextProvider({ pageContext, children }) {
 
 /** https://vike.dev/usePageContext */
 function usePageContext() {
+  console.log('inside usePageContext')
   const pageContext = useContext(Context)
   return pageContext
 }

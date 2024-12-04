@@ -4,8 +4,9 @@ import App from "../../App"
 
 import { usePageContext } from "../../renderer/usePageContext"
 
-function Page() {
-  const pageContext = usePageContext()
+function Page({ pageContext }) {
+  console.log('Error - +Page.jsx')
+  // const pageContext = usePageContext()
   let { abortReason } = pageContext
 
   if (!abortReason) {
