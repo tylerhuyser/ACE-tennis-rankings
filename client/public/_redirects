@@ -7,4 +7,5 @@ https://www.rankings.gamesetblog.com/*    https://rankings.gamesetblog.com/:spla
 /wta/singles-race   /dist/client/wta/singles-race/index.html    200
 /wta/doubles        /dist/client/wta/doubles/index.html         200
 /wta/doubles-race   /dist/client/wta/doubles-race/index.html    200
+/*                  /.netlify/functions/server                  200
 /*    /index.html   200
