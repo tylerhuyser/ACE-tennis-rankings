@@ -13,7 +13,7 @@ const paths = [
     "/wta/doubles-race" ,
 ]
 
-  let urlPathname = pageContext.urlPathname
+  let urlPathname = pageContext.urlPathname.replace(/\/index\.pageContext\.json$/, '')
 
   if (paths.includes(urlPathname)) {
     console.log(`Valid URL Path Matched: ${urlPathname}`)

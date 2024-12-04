@@ -2,17 +2,11 @@ const express = require('express');
 const serverless = require('serverless-http');
 const compression = require('compression');
 const cors = require('cors');
-// const sirv = require('sirv');
 const { renderPage } = require('vike/server');
-const path = require('path');
 const app = express();
-const { root } = require('../../src/server/root')
 
 app.use(cors());
 app.use(compression());
-
-const sirv = (await require('sirv').default)
-app.use(sirv(`${root}/dist/client`))
 
 app.get('*', async (req, res) => {
 
@@ -23,9 +17,7 @@ app.get('*', async (req, res) => {
   console.log(`Req.originalURL END`)
 
   const pageContextInit = {
-    urlOriginal: isPageContextRequest
-      ? req.originalUrl.replace(/\/index\.pageContext\.json$/, '')
-      : req.originalUrl,
+    urlOriginal: req.originalUrl,
     headersOriginal: req.headers,
   };
 
@@ -44,13 +36,7 @@ app.get('*', async (req, res) => {
     return;
   }
 
-
   const { httpResponse } = pageContext;
-
-  // if (!httpResponse) {
-  //   res.status(404).send('Page not found');
-  //   return;
-  // }
 
   const isJsonRequest = req.originalUrl.endsWith('.json');
   if (isJsonRequest) {

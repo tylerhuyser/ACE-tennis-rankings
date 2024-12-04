@@ -6,7 +6,7 @@ const data = async (pageContext) => {
 
   // console.log(`[Tour][Type] - +data.js - URL: ${pageContext.urlOriginal}`)
 
-  let urlPathname = pageContext.urlOriginal
+  let urlPathname = pageContext.urlOriginal.replace(/\/index\.pageContext\.json$/, '')
   let [, tour, type] = urlPathname.split('/')
 
   const response = await API.get(`https://tennis-rankings-api-e2ae70d187c2.herokuapp.com/api/${tour}/rankings/${type}`)
