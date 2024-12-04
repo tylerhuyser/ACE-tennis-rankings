@@ -15,10 +15,6 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist', // Confirm the output directory
   },
-  passToClient: [
-    'urlOriginal',
-    'data'
-  ],
   ssr: {
     noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
   },
