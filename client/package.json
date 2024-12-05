@@ -14,8 +14,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.26.0",
-    "@netlify/functions": "^2.8.2",
-    "@netlify/vite-plugin-netlify-edge": "^1.1.3",
     "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.7.8",
     "chokidar": "^4.0.1",
