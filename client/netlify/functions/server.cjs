@@ -10,26 +10,12 @@ app.use(compression());
 
 app.get('*', async (req, res) => {
 
-  const isPageContextRequest = req.originalUrl.endsWith('.pageContext.json');
-
-  console.log(`Req.originalURL BEGIN`)
-  console.log(req.originalUrl)
-  console.log(`Req.originalURL END`)
-
   const pageContextInit = {
     urlOriginal: req.originalUrl,
     headersOriginal: req.headers,
   };
 
-  // console.log(`PageContextInit BEGIN`)
-  // console.log(pageContextInit)
-  // console.log(`PageContextInit END`)
-
   const pageContext = await renderPage(pageContextInit);
-
-  // console.log(`Page Context BEGIN`)
-  // console.log(pageContext)
-  // console.log(`Page Context END`)
   
   if (!pageContext) {
     console.log(`No Page Context - 404 Delivered`)

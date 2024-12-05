@@ -8,8 +8,7 @@ import { PageContextProvider } from './usePageContext';
 
 let root
 
-// removed "async" from below
-function onRenderClient(pageContext) {
+async function onRenderClient(pageContext) {
 
   const { Page, urlPathname } = pageContext
 
