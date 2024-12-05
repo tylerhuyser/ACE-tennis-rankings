@@ -35,6 +35,9 @@ async function onRenderHtml(pageContext) {
   const documentHtml = escapeInject`
     <html lang="en">
       <head>
+        ${dangerouslySkipEscape(helmet.title.toString())}
+        ${dangerouslySkipEscape(helmet.meta.toString())}
+        ${dangerouslySkipEscape(helmet.link.toString())}
       </head>
       <body>
         <div id="react-root">${dangerouslySkipEscape(pageHtml)}</div>
