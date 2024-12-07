@@ -38,6 +38,15 @@ async function onRenderHtml(pageContext) {
         ${dangerouslySkipEscape(helmet.title.toString())}
         ${dangerouslySkipEscape(helmet.meta.toString())}
         ${dangerouslySkipEscape(helmet.link.toString())}
+        <!-- Google tag (gtag.js) -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-75265ZG2W0"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-75265ZG2W0');
+          </script>
       </head>
       <body>
         <div id="react-root">${dangerouslySkipEscape(pageHtml)}</div>
