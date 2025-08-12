@@ -9,7 +9,7 @@ const data = async (pageContext) => {
   let urlPathname = pageContext.urlOriginal.replace(/\/index\.pageContext\.json$/, '')
   let [, tour, type] = urlPathname.split('/')
 
-  const response = await API.get(`https://tennis-rankings-api-e2ae70d187c2.herokuapp.com/api/${tour}/rankings/${type}`)
+  const response = await API.get(`https://tennis-api.fly.dev/api/${tour}/rankings/${type}`)
   // console.log(`[Tour][Type] - +data.js - Response Length: ${response.data.length}`)
   // console.log(`[Tour][Type] - +data.js - First Index BEGIN`)
   // console.log(response.data[0])
