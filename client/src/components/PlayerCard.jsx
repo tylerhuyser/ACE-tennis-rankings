@@ -4,22 +4,23 @@ import { convertISO3CountryCode } from 'country-code-converter'
 
 import "./PlayerCard.css"
 
-export default function WTAPlayerCard(props) {
+export default function PlayerCard(props) {
 
   const { playerData, type, index } = props
 
   return (
-    <div className='player-card' key={`${playerData.ranking}${index}`}>
+
+    <div className='player-card' key={`${playerData.ranking}${playerData.points}${index}`}>
 
       <p className='player-ranking'>{playerData.ranking}</p>
-
+      
       <div className='player-country-container'>
-        
+
         <div className='flag-container'>
 
           <ReactCountryFlag
             className="emojiFlag"
-            countryCode={ type.includes("Doubles") && type.includes("Race") ? playerData?.player1?.countryCode ? convertISO3CountryCode(playerData?.player1?.countryCode).ISO2 : "" : playerData?.player?.countryCode ? convertISO3CountryCode(playerData?.player?.countryCode).ISO2 : "" }
+            countryCode={ type.includes("Doubles") && type.includes("Race") ? playerData?.player1?.country ? convertISO3CountryCode(playerData?.player1?.country).ISO2 : "" : playerData?.country ? convertISO3CountryCode(playerData?.country).ISO2 : "" }
             style={{
               fontSize: '200%',
               lineHeight: '50px',
@@ -34,7 +35,7 @@ export default function WTAPlayerCard(props) {
             
                 <ReactCountryFlag
                   className="emojiFlag"
-                  countryCode={playerData?.player2?.countryCode ? convertISO3CountryCode(playerData?.player2?.countryCode).ISO2 : ""}
+                  countryCode={playerData?.player2?.country ? convertISO3CountryCode(playerData?.player2?.country).ISO2 : ""}
                   style={{
                     fontSize: '200%',
                     lineHeight: '50px',
@@ -52,13 +53,13 @@ export default function WTAPlayerCard(props) {
         </div>
 
         <div className='country-name-container'>
-            <p className='player-country'>{ type.includes("Doubles") && type.includes("Race") ? `${playerData?.player1?.countryCode} / ${playerData?.player2?.countryCode}`  : playerData?.player?.countryCode}</p>
+            <p className='player-country'>{ type.includes("Doubles") && type.includes("Race") ? `${playerData?.player1?.country} / ${playerData?.player2?.country}`  : playerData?.country}</p>
         </div>
 
       </div>
 
       <div className='player-name-container'>
-        <p className='player-name'>{(type.includes("Doubles") && type.includes("Race")) ? `${playerData?.player1?.fullName} / ${playerData?.player2?.fullName}` : playerData?.player?.fullName}</p>
+        <p className='player-name'>{(type.includes("Doubles") && type.includes("Race")) ? `${playerData?.player1?.name} / ${playerData?.player2?.name}` : playerData?.name}</p>
       </div>
 
       <p className='player-points'>{`${playerData.points} points`}</p>
@@ -73,5 +74,7 @@ export default function WTAPlayerCard(props) {
       }
 
     </div>
+    
   )
+
 }

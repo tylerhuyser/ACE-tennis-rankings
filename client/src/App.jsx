@@ -18,7 +18,7 @@ import {
 
 import './App.css';
 
-function App({ pageContext }, props) {
+function App({ pageContext }) {
 
   const [isClient, setIsClient] = useState(false);
 
@@ -28,7 +28,7 @@ function App({ pageContext }, props) {
 
   console.log(`App.jsx - Client or Server? ${isClient ? 'CLIENT ACTIVE' : 'SERVER ACTIVE'}`);
 
-  const [error, setError] = useState(props.error || false)
+  const [error, setError] = useState(false)
   console.log(`Error? ${error}`)
 
 
