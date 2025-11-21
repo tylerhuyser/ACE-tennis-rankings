@@ -15,6 +15,12 @@
   letter-spacing: 1.2px;
 }
 
+.rankings-date {
+  text-align: center;
+  font-size: 20px;
+  color: black;
+}
+
 .players-container, .no-data-container, .error-container {
   display: flex;
   flex-direction: column;
