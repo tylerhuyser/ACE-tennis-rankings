@@ -34,7 +34,7 @@ function App({ pageContext }) {
 
   const [loading, setLoading] = useState(false);
   const [rankingsData, setRankingsData] = useState(pageContext.data.rankings || []);
-  const [date, setData] = useState(pageContext.data.lastUpdated || "")
+  const [date, setDate] = useState(pageContext.data.lastUpdated || "")
 
   let location;
   if (typeof window !== 'undefined') {
@@ -100,8 +100,9 @@ function App({ pageContext }) {
 
         try {
           const data = await fetchFunction();
-          setRankingsData(data.ranings.sort((a, b) => a.ranking - b.ranking));
-          setImmediate(data.lastUpdated)
+          console.log(data)
+          setRankingsData(data.rankings.sort((a, b) => a.ranking - b.ranking));
+          setDate(data.lastUpdated)
         } catch (error) {
           console.error('Error fetching data:', error);
           setError(error)
