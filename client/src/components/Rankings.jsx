@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import IconLogo from './shared/Loading/IconLogo';
 import PlayerCard from './PlayerCard';
@@ -10,6 +10,8 @@ import './Rankings.css';
 export default function Rankings(props) {
 
   const { data, date, tour, type, loading, error } = props;
+
+  const publishDate = setPublishDate(getMostRecentMonday(date))
 
   console.log('Inside RANKINGS component')
   console.log(data[0])
@@ -58,7 +60,7 @@ export default function Rankings(props) {
     <div className="rankings-container">
       <div className="rankings-hero-container">
         <h1 className="rankings-title">{`${tour} ${type} Rankings`}</h1>
-        <h2 className='rankings-date'>{`Published ${getMostRecentMonday(date)}`}</h2>
+        <h2 className='rankings-date'>{`Published ${publishDate}`}</h2>
       </div>
       <div className="players-container">
         {data.map((player, index) => (
