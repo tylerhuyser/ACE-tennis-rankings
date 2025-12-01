@@ -11,7 +11,7 @@ export default function Rankings(props) {
 
   const { data, date, tour, type, loading, error } = props;
 
-  const publishDate = setPublishDate(getMostRecentMonday(date))
+  const publishDate = getMostRecentMonday(date)
 
   console.log('Inside RANKINGS component')
   console.log(data[0])
