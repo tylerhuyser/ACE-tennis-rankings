@@ -11,7 +11,12 @@ function Page({ pageContext }) {
     abortReason = pageContext.is404 ? 'Page not found.' : 'Something went wrong.'
   }
 
+  const errorPageContext = {
+    ...pageContext,
+    data: pageContext.data || { rankings: [], lastUpdated: new Date().toISOString() }
+  }
+
   return (
-    <App pageContext={pageContext} error={abortReason} />
+    <App pageContext={errorPageContext} error={abortReason} />
   )
 }

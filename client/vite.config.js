@@ -9,16 +9,23 @@ const dynamicRoutes = routesArray
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   base: '/',
-  plugins: [react(), vike(), Sitemap({ hostname: 'https://rankings.gamesetblog.com', dynamicRoutes, changefreq: 'weekly' })],
+  plugins: [
+    react(),
+    vike({prerender: true}),
+    Sitemap({ hostname: 'https://rankings.gamesetblog.com', dynamicRoutes, changefreq: 'weekly' })
+    ],
   build: {
     outDir: 'dist', // Confirm the output directory
   },
   ssr: {
-    noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
+    noExternal: ['react-helmet-async'],
   },
-  resolve: {
-    alias: {
-      'vike/server': '/node_modules/vike/dist/esm/node/runtime/index.js'
-    }
-  }
+  // ssr: {
+  //   noExternal: ['react-helmet-async', 'vike', 'vite', 'sirv'],
+  // },
+  // resolve: {
+  //   alias: {
+  //     'vike/server': '/node_modules/vike/dist/esm/node/runtime/index.js'
+  //   }
+  // }
 }));

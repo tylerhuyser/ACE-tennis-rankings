@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import IconLogo from './shared/Loading/IconLogo';
 import PlayerCard from './PlayerCard';
@@ -13,8 +13,8 @@ export default function Rankings(props) {
 
   const publishDate = getMostRecentMonday(date)
 
-  console.log('Inside RANKINGS component')
-  console.log(data[0])
+  // console.log('Inside RANKINGS component')
+  // console.log(data[0])
 
   // LOADING
   if (loading) {

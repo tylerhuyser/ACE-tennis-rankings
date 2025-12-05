@@ -81,42 +81,42 @@ function App({ pageContext }) {
   };
 
   // Effect to fetch data
-  useEffect(() => {
-    const hasParamsChanged =
-      tour !== prevParams.current.tour ||
-      type !== prevParams.current.type
+  // useEffect(() => {
+  //   const hasParamsChanged =
+  //     tour !== prevParams.current.tour ||
+  //     type !== prevParams.current.type
 
-    // Fetch data only if parameters change or if it's the first render
-    if ((hasParamsChanged || rankingsData.length === 0) && !error) {
+  //   // Fetch data only if parameters change or if it's the first render
+  //   if ((hasParamsChanged || rankingsData.length === 0) && !error) {
 
-      async function fetchData() {
+  //     async function fetchData() {
 
-        setLoading(true);
+  //       setLoading(true);
 
-        const key = (pathName === "/") ? "atp-singles" : `${tour?.toLowerCase()}-${type.split(" ")[0].toLowerCase()}${type.includes("Race")? `-race` : ''}`;
-        const fetchFunction = fetchFunctions[key]
+  //       const key = (pathName === "/") ? "atp-singles" : `${tour?.toLowerCase()}-${type.split(" ")[0].toLowerCase()}${type.includes("Race")? `-race` : ''}`;
+  //       const fetchFunction = fetchFunctions[key]
 
-        console.log(`Fetching data for ${tour} ${type}`);
+  //       console.log(`Fetching data for ${tour} ${type}`);
 
-        try {
-          const data = await fetchFunction();
-          console.log(data)
-          setRankingsData(data.rankings.sort((a, b) => a.ranking - b.ranking));
-          setDate(data.lastUpdated)
-        } catch (error) {
-          console.error('Error fetching data:', error);
-          setError(error)
-        }
-        setLoading(false);
-        prevParams.current = { tour, type };
-      }
+  //       try {
+  //         const data = await fetchFunction();
+  //         console.log(data)
+  //         setRankingsData(data.rankings.sort((a, b) => a.ranking - b.ranking));
+  //         setDate(data.lastUpdated)
+  //       } catch (error) {
+  //         console.error('Error fetching data:', error);
+  //         setError(error)
+  //       }
+  //       setLoading(false);
+  //       prevParams.current = { tour, type };
+  //     }
 
-      fetchData();
+  //     fetchData();
 
-    } else if (!hasParamsChanged) {
-      setLoading(false)
-    }
-  }, [tour, type]);
+  //   } else if (!hasParamsChanged) {
+  //     setLoading(false)
+  //   }
+  // }, [tour, type]);
 
   const routesConfig = [
     {path: "/"},
