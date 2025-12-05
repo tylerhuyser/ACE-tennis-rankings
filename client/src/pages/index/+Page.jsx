@@ -2,11 +2,11 @@ export { Page }
 
 import App from '../../App';
 
-function Page({ pageContext }, client) {
+function Page({ pageContext }) {
 
   console.log('HOME (Index) - +Page.jsx')
 
   return (
-    <App pageContext={pageContext} client={client} />
+    <App pageContext={pageContext} />
   );
 }

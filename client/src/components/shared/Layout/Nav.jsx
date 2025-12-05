@@ -1,12 +1,10 @@
 import React from 'react'
 import { Link, useLocation } from "react-router-dom"
-// import { Link } from '../../../renderer/Link'
 
 import "./Nav.css"
 
 export default function Nav(props) { 
 
-  const { setLoading } = props
   const { navVisibility, setNavVisibility } = props
   const { iconVisibility, setIconVisibility } = props
 
@@ -16,8 +14,6 @@ export default function Nav(props) {
     if (location.pathname === to) {
       // Prevent navigation if the link is disabled
       event.preventDefault();
-    } else {
-      setLoading(true);
     }
 
     setNavVisibility(false);
