@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
-    "dev": "vite && npm run serve:dev",
+    "dev": "vite --host && npm run serve:dev",
     "build": "vite build",
     "prerender": "vite build",
     "serve:dev": "node ./src/server/server.js",

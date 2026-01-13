@@ -1,77 +1,107 @@
 import React from 'react'
 import { ReactCountryFlag } from "react-country-flag";
-import { convertISO3CountryCode } from 'country-code-converter'
+import { convertISO3CountryCode } from "country-code-converter";
 
 import "./PlayerCard.css"
 
-export default function PlayerCard(props) {
+export default function PlayerCard({playerData, type, index}) {
+  const isDoubles = type.includes("Doubles")
+  const isRace = type.includes("Race")
 
-  const { playerData, type, index } = props
+  const renderName = () => {
+    if (isDoubles && isRace) {
+      return (
+        <>
+          <p className='player-name player-name-line'>{playerData.player1.name}</p>
+          <p className='player-name player-name-line'>{`& ${playerData.player2.name}`}</p>
+        </>
+      );
+    }
+
+    const nameParts = playerData?.name?.split(' ') || [];
+    const lastName = nameParts.slice(-1).join(' ');
+    const firstName = nameParts.slice(0, -1).join(' ');
+
+    return (
+      <>
+        <p className='player-name player-last-name'>{lastName}</p>
+        <p className='player-name player-first-name'>{firstName}</p>
+      </>
+    );
+  }
 
   return (
 
     <div className='player-card' key={`${playerData.ranking}${playerData.points}${index}`}>
 
-      <p className='player-ranking'>{playerData.ranking}</p>
+      {/* RANKING */}
+      <div className='player-ranking-container player-card-section'>
+        <p className='player-ranking'>{playerData.ranking}</p>
+      </div>
       
-      <div className='player-country-container'>
+      {/* COUNTRY/FLAGS */}
+      <div className='player-country-container player-card-section'>
 
         <div className='flag-container'>
 
           <ReactCountryFlag
             className="emojiFlag"
-            countryCode={ type.includes("Doubles") && type.includes("Race") ? playerData?.player1?.country ? convertISO3CountryCode(playerData?.player1?.country).ISO2 : "" : playerData?.country ? convertISO3CountryCode(playerData?.country).ISO2 : "" }
+            countryCode={isDoubles && isRace ? convertISO3CountryCode(playerData.player1.country).ISO2 : convertISO3CountryCode(playerData.country).ISO2}
             style={{
-              fontSize: '200%',
-              lineHeight: '50px',
+              fontSize: '2rem',
             }}
+            aria-label="country flag"
           />
 
-          {type.includes("Doubles") && type.includes("Race") ? 
+          {isDoubles && isRace && (
             
-              <>
-              
-                / 
+            <>
             
-                <ReactCountryFlag
-                  className="emojiFlag"
-                  countryCode={playerData?.player2?.country ? convertISO3CountryCode(playerData?.player2?.country).ISO2 : ""}
-                  style={{
-                    fontSize: '200%',
-                    lineHeight: '50px',
-                  }}
-                />
-          
-            </> 
+              <span className='flag-divider'>/</span>
+  
+              <ReactCountryFlag
+                className="emojiFlag"
+                countryCode={convertISO3CountryCode(playerData.player2.country).ISO2}
+                style={{ fontSize: '2em' }}
+                aria-label="country flag"
+              />
+        
+            </>
 
-            :
-
-            <></>
-            
-          }
+          )}
 
         </div>
 
         <div className='country-name-container'>
-            <p className='player-country'>{ type.includes("Doubles") && type.includes("Race") ? `${playerData?.player1?.country} / ${playerData?.player2?.country}`  : playerData?.country}</p>
+          <p className="country-name">{isDoubles ? playerData.player1.country : playerData.country}</p>
+          {isDoubles && isRace && (
+            <>
+              <span className='flag-divider'>/</span>
+              <p className="country-name">{playerData.player2.country}</p>
+            </>
+          )}
         </div>
 
       </div>
 
-      <div className='player-name-container'>
-        <p className='player-name'>{(type.includes("Doubles") && type.includes("Race")) ? `${playerData?.player1?.name} / ${playerData?.player2?.name}` : playerData?.name}</p>
+      {/* PLAYER NAME */}
+      <div className='player-name-container player-card-section'>
+        {renderName()}
       </div>
 
-      <p className='player-points'>{`${playerData.points} points`}</p>
+      {/* POINTS */}
+      <div className='player-points-container player-card-section'>
+        <div className='stat-value'>{playerData.points}</div>
+        <div className='stat-label'>points</div>
+      </div>
 
-      {playerData.tournamentsPlayed ?
-        
-        <p className='player-tournaments'>{`${playerData.tournamentsPlayed} tourneys`}</p>
-
-      :
-        <></>
-
-      }
+      {/* TOURNAMENTS PLAYED */}
+      {playerData.tournamentsPlayed && (
+        <div className='player-tournaments-container player-card-section'>
+          <div className='stat-value'>{playerData.tournamentsPlayed}</div>
+          <div className='stat-label'>tourneys</div>
+        </div>
+      )}
 
     </div>
     
