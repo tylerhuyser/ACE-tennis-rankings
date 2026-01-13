@@ -5,6 +5,9 @@
   justify-content: flex-start;
 
   width: calc(100% - 25px);
+
+  position: relative;
+  top: 100px;
 }
 
 .rankings-title {

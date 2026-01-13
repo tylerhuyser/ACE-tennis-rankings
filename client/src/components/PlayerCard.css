@@ -7,7 +7,6 @@
   width: 100%;
   min-height: 80px;
   padding: 1.25rem 1rem;
-  box-sizing: border-box;
 
   border-bottom: 1px solid grey;
   transition: background-color 0.2s ease;
@@ -28,8 +27,6 @@
   flex-wrap: wrap;
   flex-shrink: 0;
   gap: 0.25rem;
-
-  box-sizing: border-box;
 }
 
 .player-ranking-container {
@@ -44,15 +41,13 @@
 
 /* PLAYER COUNTRY */
 .player-country-container {
-  /* width: 15%; */
+
 }
 
 .flag-container, .country-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  box-sizing: border-box;
 }
 
 .emojiFlag {

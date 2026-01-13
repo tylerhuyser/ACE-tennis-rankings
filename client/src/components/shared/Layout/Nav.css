@@ -4,7 +4,7 @@
   justify-content: flex-start;
   align-items: center;
 
-  width: 20vw;
+  width: 20%;
   height: calc(100vh - 100px);
 
   position: fixed;
@@ -12,10 +12,8 @@
   left: 0px;
   z-index: 2;
 
-  background: #396089;
-  box-shadow: 2px 2px 10px #396089;
-  background: #698f5a;
-  box-shadow: 2px 2px 10px #698f5a;
+  background: var(--light-green);
+  box-shadow: 2px 2px 10px var(--light-green);
 
   backdrop-filter: blur(10px);
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -29,13 +27,13 @@
 
 .nav-link {
 
-  width: calc(20vw - 50px);
+  width: 100%;
   padding: 25px;
 
-  border-bottom: #4f6c44 1px solid;
+  border-bottom: var(--dark-green) 1px solid;
 
-  font-family: helvetica;
-  font-size: 24px;
+  /* font-family: helvetica; */
+  font-size: 1.5rem;
   color: white;
   text-decoration: none;
   text-align: left;
@@ -48,8 +46,7 @@
 }
 
 #blog-link {
-  width: calc(20vw - 50px - 10px);
-  margin-top: 5px;
+  width: 100%;
 
   background: #f39c12;
   color: white;
@@ -58,25 +55,25 @@
 
 #blog-link:hover {
   background-color: white;
-  color: #f39c12;
-  border: #f39c12 5px solid;
+  color: var(--orange);
+  border: var(--orange) 5px solid;
 }
 
 .nav-link:first-of-type {
-  border-top: #4f6c44 1px solid;
+  border-top: var(--dark-green) 1px solid;
 }
 
 @media screen and (max-width: 1200px), screen and (max-device-width: 1200px) {
   .nav-container {
-    width: 100vw;
+    width: 100%;
   }
 
   .nav-link {
-    width: calc(100vw - 50px);
+    width: 100%;
   }
 
   #blog-link {
-    width: calc(100vw - 50px - 10px);
+    width: 100%;
   }
 
   .visible {
@@ -99,7 +96,7 @@
 
 @media screen and (max-width: 540px), screen and (max-device-width: 540px) {
   .nav-link {
-    font-size: 23px;
+    font-size: 1.5rem;
   }
 }
 
