@@ -1,15 +1,18 @@
+
 .player-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
   
   width: 100%;
   min-height: 80px;
-  padding: 1.25rem 1rem;
+  padding: 1rem 0.75rem;
 
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid var(--grey);
   transition: background-color 0.2s ease;
+
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .player-card:last-child {
@@ -29,22 +32,20 @@
   gap: 0.25rem;
 }
 
+/* Ranking */
 .player-ranking-container {
   width: 5%;
 }
 
 .player-ranking {
-  font-size: 1.5rem;
+  font-size: var(--fs-ranking);
   line-height: 1;
   font-weight: 700;
 }
 
-/* PLAYER COUNTRY */
-.player-country-container {
-
-}
-
-.flag-container, .country-name-container {
+/* Country */
+.flag-container,
+.country-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +53,7 @@
 
 .emojiFlag {
   padding: 0.15rem;
-  background-color: orange;
+  background-color: var(--orange);
   border-radius: 0.25rem;
 }
 
@@ -60,21 +61,22 @@
   padding: 0.15rem;
   margin: 0;
 
-  font-size: 0.75rem;
-  line-height: 1.2;
+  font-size: var(--fs-value);
+  line-height: 1;
+  letter-spacing: 0.5px;
+
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .flag-divider {
-  color: #95a5a6;
-  font-size: 0.9rem;
+  color: var(--grey);
+  font-size: var(--fs-label);
+  line-height: 1;
   margin: 0 0.25rem;
 }
 
-/* NAME */
-
+/* Name */
 .player-name-container {
   align-items: flex-start;
   overflow: hidden;
@@ -83,96 +85,110 @@
 
 .player-name {
   margin: 0;
-  color: black;
-  font-size: 1rem;
+
+  color: var(--black);;
+  font-size: var(--fs-name);
   line-height: 1.3;
+
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .player-last-name {
-  font-size: 1.1rem;
+  font-size: var(--fs-name);
+  line-height: 1;
   font-weight: 700; 
 }
 
 .player-first-name {
-  color: grey;
-  font-size: 0.9rem;
+  color: var(--grey);;
+  font-size: var(--fs-value);
   font-weight: 400;
 }
 
-/* STATS - Points and Tournaments */
-
-.player-points-container, .player-tournaments-container {
+/* Stats - Points and Tournaments */
+.player-points-container,
+.player-tournaments-container {
   flex-shrink: 0;
-  width: 15%;
 }
 
 .stat-value {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: black;
+  font-size: var(--fs-value);
+  color: var(--black);
   line-height: 1;
+  font-weight: 600;
 }
 
 .stat-label {
-  font-size: 0.7rem;
-  color: #95a5a6;
-  text-transform: uppercase;
+  font-size: var(--fs-label);
+  color: var(--grey);
   letter-spacing: 0.5px;
   line-height: 1;
+
+  text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
-  .player-card {
-    padding: 1rem 0.75rem;
-    gap: 1.5rem;
-  }
 
-  .player-ranking {
-    font-size: 1.25rem;
-  }
 
-  .country-name {
-    font-size: 0.65rem;
-  }
 
-  .player-name {
-    font-size: 0.9rem;
-  }
-
-  .player-last-name {
-    font-size: 1rem;
-  }
-
-  .stat-value {
-    font-size: 1.1rem;
-  }
-
-  .stat-label {
-    font-size: 0.65rem;
-  }
+@media only screen and (min-width: 375px) {
 
 }
 
-@media screen and (max-width: 540px), screen and (max-device-width: 540px) {
+
+@media only screen and (min-width: 481px)  {
+
+}
+
+
+@media only screen and (min-width: 768px) {
   .player-card {
-    gap: 1rem;
-    padding: 0.75rem 0.5rem;
+    padding: 1.25rem 1rem;
+    gap: 2rem;
   }
 
   .player-ranking {
-    font-size: 1.1rem;
+    font-size: var(--fs-ranking)
   }
 
   .country-name {
-    font-size: 0.6rem;
+    font-size: var(--fs-value)
+  }
+
+  .player-name {
+   font-size: var(--fs-name)
+  }
+
+  .player-first-name {
+    font-size: var(--fs-value)
+  }
+
+  .player-last-name {
+    font-size: var(--fs-name)
   }
 
   .stat-value {
-    font-size: 1rem;
+    font-size: var(--fs-value)
   }
+
+  .stat-label, .flag-divider {
+    font-size: var(--fs-label)
+  }
+}
+
+
+@media only screen and (min-width: 1024px)  {
+
+}
+
+
+@media only screen and (min-width: 1200px)  {
+
+}
+
+@media only screen and (min-width: 1600px)  {
+
 }
