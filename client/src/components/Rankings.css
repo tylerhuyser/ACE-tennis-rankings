@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: flex-start;
 
-  width: 90%;
+  /* width: 90%; */
 }
 
 .no-data-container h2,
@@ -80,7 +80,7 @@
 
 @media screen and (min-width: 1024px) {
   .rankings-container {
-    max-width: 550px;
+    /* max-width: 550px; */
   }
 
   .loader-container {

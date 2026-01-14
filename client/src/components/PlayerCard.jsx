@@ -5,8 +5,14 @@ import { convertISO3CountryCode } from "country-code-converter";
 import "./PlayerCard.css"
 
 export default function PlayerCard({playerData, type, index}) {
+
+  console.log(playerData)
+
   const isDoubles = type.includes("Doubles")
   const isRace = type.includes("Race")
+
+  console.log(`Is Doubles? ${isDoubles}`)
+  console.log(`Is Race? ${isRace}`)
 
   const renderName = () => {
     if (isDoubles && isRace) {
@@ -73,7 +79,7 @@ export default function PlayerCard({playerData, type, index}) {
         </div>
 
         <div className='country-name-container'>
-          <p className="country-name">{isDoubles ? playerData.player1.country : playerData.country}</p>
+          <p className="country-name">{isDoubles && isRace ? playerData.player1.country : playerData.country}</p>
           {isDoubles && isRace && (
             <>
               <span className='flag-divider'>/</span>
