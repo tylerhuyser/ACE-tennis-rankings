@@ -16,10 +16,27 @@ export default function PlayerCard({playerData, type, index}) {
 
   const renderName = () => {
     if (isDoubles && isRace) {
+
+      const formatName = (fullName) => {
+        const nameParts = fullName.split(' ');
+        const lastName = nameParts[nameParts.length - 1];
+        const firstName = nameParts.slice(0, -1).join(' ');
+        
+        return (
+          <>
+            <span className='player-last-name'>{lastName}</span>,
+            <span className='player-first-name'> {firstName}</span>
+          </>
+        );
+      };
+
       return (
         <>
-          <p className='player-name player-name-line'>{playerData.player1.name}</p>
-          <p className='player-name player-name-line'>{`& ${playerData.player2.name}`}</p>
+          <p className='player-name player-name-line'>{formatName(playerData.player1.name)}</p>
+          <p className='player-name player-name-line'>
+            <span className=''>& </span>
+            {formatName(playerData.player2.name)}
+          </p>
         </>
       );
     }
@@ -30,7 +47,7 @@ export default function PlayerCard({playerData, type, index}) {
 
     return (
       <>
-        <p className='player-name player-last-name'>{lastName}</p>
+        <p className='player-name player-last-name'>{lastName},</p>
         <p className='player-name player-first-name'>{firstName}</p>
       </>
     );
