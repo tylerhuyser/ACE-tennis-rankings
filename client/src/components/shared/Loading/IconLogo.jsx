@@ -10,7 +10,7 @@ const IconLogo = (props) => (
     <g transform="translate(3.000000, 3.000000)">
       <g>
         
-        <text x="18" y="32" fontFamily="bogart-semibold" fontSize="24px" fontStretch="semi-expanded" fill={props.color}>ACE</text>
+        <text x="24" y="32" fontFamily="oswald" fontSize="24px" fontStretch="semi-expanded" letterSpacing="3px" fill={props.color}>ACE</text>
         <polygon
           id="Shape"
           stroke={props.color}
